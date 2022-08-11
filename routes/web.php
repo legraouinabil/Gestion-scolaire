@@ -21,3 +21,4 @@ Route::get('/welcome', function () {
 
 
 Route::get('/' , [SiteController ::class , 'index']);
+Route::get('/formation/{id}' , [SiteController ::class , 'formation']);
