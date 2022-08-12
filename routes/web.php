@@ -22,3 +22,7 @@ Route::get('/welcome', function () {
 
 Route::get('/' , [SiteController ::class , 'index']);
 Route::get('/formation/{id}' , [SiteController ::class , 'formation']);
+Route::get('/formation/{id}/filier/{f_id}' , [SiteController ::class , 'showFilier']);
+Route::get('/notfound' ,function(){
+    return view('Front.notFound');
+});

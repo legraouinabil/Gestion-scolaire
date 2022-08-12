@@ -16,7 +16,8 @@ class CreateFiliersTable extends Migration
         Schema::create('filiers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
+            $table->string('small_description');
+            $table->text('description');
             $table->string('image');
             $table->string('dureé');
             $table->unsignedBigInteger('formation_id')->nullable();

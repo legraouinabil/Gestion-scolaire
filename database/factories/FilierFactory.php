@@ -17,6 +17,7 @@ class FilierFactory extends Factory
         return [
             'name' => $name, 
             'description' =>$this->faker->text,
+            'small_description' =>$this->faker->text(),
             'dureé'  => '2year',
             'formation_id'  => $this->faker->numberBetween($int1 = 1 , $int2=4),
             'image'  => $this->faker->imageUrl(640, 480, 'animals', true),
