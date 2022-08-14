@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Stagaire;
-use App\Http\Requests\StoreStagaireRequest;
-use App\Http\Requests\UpdateStagaireRequest;
+use Illuminate\Http\Request;
 
-class StagaireController extends Controller
+class BlogController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,10 +29,10 @@ class StagaireController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreStagaireRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreStagaireRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -42,10 +40,10 @@ class StagaireController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Stagaire  $stagaire
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Stagaire $stagaire)
+    public function show($id)
     {
         //
     }
@@ -53,10 +51,10 @@ class StagaireController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Stagaire  $stagaire
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Stagaire $stagaire)
+    public function edit($id)
     {
         //
     }
@@ -64,11 +62,11 @@ class StagaireController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateStagaireRequest  $request
-     * @param  \App\Models\Stagaire  $stagaire
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateStagaireRequest $request, Stagaire $stagaire)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -76,10 +74,10 @@ class StagaireController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Stagaire  $stagaire
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Stagaire $stagaire)
+    public function destroy($id)
     {
         //
     }

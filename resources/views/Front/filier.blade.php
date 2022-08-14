@@ -28,7 +28,7 @@
                                 <span><i class="icon-calendar mr-2"></i>4 Years</span>
                             </p>
                             <h3><a href="#"> {{$f->name}} </a></h3>
-                            <p> {{$f->description}}</p>
+                            <p> {{$f->small_description}}</p>
                             <p><a href="#" class="btn btn-primary">Apply now</a></p>
                         </div>
                     </div>

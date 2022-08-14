@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row no-gutters d-flex align-items-center align-items-stretch">
             <div class="col-md-4 d-flex align-items-center py-4">
-                <a class="navbar-brand" href="index.html">Fox. <span>University</span></a>
+                <a class="navbar-brand" href="{{route('front.home')}}">Fox. <span>University</span></a>
             </div>
             <div class="col-lg-8 d-block">
                 <div class="row d-flex">
@@ -24,7 +24,7 @@
                     </div>
                     <div class="col-md topper d-flex align-items-center justify-content-end">
                         <p class="mb-0">
-                            <a href="#" class="btn py-2 px-3 btn-primary d-flex align-items-center justify-content-center">
+                            <a href="/login" class="btn py-2 px-3 btn-primary d-flex align-items-center justify-content-center">
                                 <span>Apply now</span>
                             </a>
                         </p>
@@ -47,12 +47,31 @@
     </form>
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active"><a href="index.html" class="nav-link pl-0">Home</a></li>
-            <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-            <li class="nav-item"><a href="courses.html" class="nav-link">Courses</a></li>
-            <li class="nav-item"><a href="teacher.html" class="nav-link">Staff</a></li>
-            <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+            <li class="nav-item active"><a href="{{route('front.home')}}   " class="nav-link pl-0">Home</a></li>
+          
+             
+           <li class="dropdown open nav-item">
+            <a class="nav-link" dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                Formation
+                </button>
+            <div class="dropdown-menu" aria-labelledby="triggerId">
+              @foreach ($formations as $f)
+                  
+              <a class="dropdown-item" href=" {{route('front.filier' , $f->id)}} ">{{$f->name}}
+              <i class="fa fa-address-book" aria-hidden="true"></i>
+              </a>
+             
+              @endforeach
+             
+             
+            </div>
+          </li>
+            
+            </li>
+          
+            <li class="nav-item"><a href=" {{route('front.blog')}}" class="nav-link">Blog</a></li>
+          <li class="nav-item"><a href="  {{route('front.cantact')}} " class="nav-link">Contact</a></li>
         </ul>
       </div>
     </div>

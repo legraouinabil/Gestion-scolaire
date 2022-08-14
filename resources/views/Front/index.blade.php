@@ -2,6 +2,9 @@
 
 
 @section('content')
+
+
+
 <section class="home-slider owl-carousel">
     <div class="slider-item" style="background-image:url({{asset('front/images/bg_1.jpg')}});">
         <div class="overlay"></div>
@@ -10,7 +13,7 @@
         <div class="col-md-6 ftco-animate">
           <h1 class="mb-4">Education Needs Complete Solution</h1>
           <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-          <p><a href="#" class="btn btn-primary px-4 py-3 mt-3">Contact Us</a></p>
+          <p><a href="{{route('front.cantact')}}" class="btn btn-primary px-4 py-3 mt-3">Contact Us</a></p>
         </div>
       </div>
       </div>
@@ -207,8 +210,8 @@
                       <span><i class="icon-table mr-2"></i>10 seats</span>
                       <span><i class="icon-calendar mr-2"></i>4 Years</span>
                   </p>
-                  <h3><a href="#"> {{$filier->name}} </a></h3>
-                  <p> {{$filier->description}}</p>
+                  <h3 class="heading"><a class="heading" href="{{route('front.filierDetail' , [$filier->formation->id , $filier->id])}}"> {{$filier->name}} </a></h3>
+                  <p> {{$filier->small_description}}</p>
                   <p><a href="#" class="btn btn-primary">Apply now</a></p>
               </div>
           </div>
@@ -334,7 +337,7 @@
                       </div>
                     </a>
                     <div class="text bg-white p-4">
-                      <h3 class="heading"><a href="#"> {{$blog->title}} </a></h3>
+                      <h3 class="heading"><a href="{{route('front.blogDetail' , $blog->id)}}"> {{$blog->title}} </a></h3>
                       <p> {{$blog->description}} </p>
                       <div class="d-flex align-items-center mt-4">
                           <p class="mb-0"><a href="#" class="btn btn-primary">Read More <span class="ion-ios-arrow-round-forward"></span></a></p>

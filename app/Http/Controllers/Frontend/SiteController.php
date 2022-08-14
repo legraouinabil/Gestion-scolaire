@@ -53,12 +53,30 @@ class SiteController extends Controller
                return redirect('/notfound');
              }
       
-
-
-
-
              return view('Front.filierDetail')->with($data);
 
        
     }
+
+
+    public function blogdetail($id){
+        $data['blog'] = Blog::findOrFail($id);
+        return view('Front.blogDetail')->with($data);
+    }
+
+    public function blog(){
+        $data['blogs']  = Blog::select('id' , 'title'  , 'description' , 'image')->get();
+
+
+        return view('Front.blog')->with($data);
+    }
+
+
+    public function cantact(){
+        return view('Front.cantact');
+    }
+
+   
+
+  
 }
