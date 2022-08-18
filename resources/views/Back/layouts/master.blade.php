@@ -482,7 +482,7 @@
     <!-- Responsive Breadcrumb End-->
        <!-- Page Content  -->
        <div id="content-page" class="content-page">
-          <div class="container-fluid"  id="app">
+          <div class="container-fluid" id="app">
            
                
                  

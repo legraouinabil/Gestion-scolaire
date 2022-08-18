@@ -35,5 +35,6 @@ Route::get('/notfound' ,function(){
 
 
 Route::get('/admin/index' , [DashbordController ::class , 'index'])->name('back.home');
-Route::get('/admin/formation' , [FormationController ::class , 'index'])->name('back.formation');
-Route::get('/admin/formation/list' , [FormationController ::class , 'getFormation'])->name('back.formation.list');
+
+
+Route::get('/admin/formation', [FormationController::class, 'view'])->name('admin.formation');

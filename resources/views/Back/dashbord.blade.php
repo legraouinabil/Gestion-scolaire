@@ -4,11 +4,10 @@
 @section('content')
     
 
-<div>
-    <example-component></example-component>
 
-</div>
-  
+
+
+
    
 
 

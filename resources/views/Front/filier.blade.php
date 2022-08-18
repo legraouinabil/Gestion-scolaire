@@ -27,7 +27,7 @@
                                 <span><i class="icon-table mr-2"></i>10 seats</span>
                                 <span><i class="icon-calendar mr-2"></i>4 Years</span>
                             </p>
-                            <h3><a href="#"> {{$f->name}} </a></h3>
+                            <h3><a href=" {{route('front.filierDetail', [$f->formation->id , $f->id])}} "> {{$f->name}} </a></h3>
                             <p> {{$f->small_description}}</p>
                             <p><a href="#" class="btn btn-primary">Apply now</a></p>
                         </div>
