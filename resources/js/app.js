@@ -25,16 +25,15 @@ const Toast = Swal.mixin({
   })
   window.Toast=Toast
 
-
-
-
+  
 import formation  from './components/Admin/Formation.vue';
-
+import filier  from './components/Admin/Filier.vue';
+import blog  from './components/Admin/Blog.vue';
 /////////////////////////////////
 
 Vue.component('Formation',formation);
-
-
+Vue.component('Filier',filier);
+Vue.component('Blog',blog);
 
 const app = new Vue({
     el: '#app',

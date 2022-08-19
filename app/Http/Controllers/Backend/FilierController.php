@@ -4,82 +4,73 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Filier;
 
 class FilierController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function view(){
+        return view("Back.filier.index");
+    }
+
+
     public function index()
     {
-        //
+      
+        $data= Filier::orderBy('id' , 'desc')->get();
+        return response()->json($data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function store(Request $request){
+        
+    $validator = Validator::make($request->all(),[
+        'name'=>'string|required',
+        'description'=>'string|required',
+       
+       
+    ]);
+  if($validator->fails()) {
+      return response()->json(['status'=>'error' , 'errors'=>$validator->errors()]);
+  }
+
+    $filier = Filier::create([
+        'name'=>$request->name,
+        'description'=>$request->description,
+       
+
+    ]);
+    return response()->json(['status' => 'succes' , 'data' =>$filier]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function destroy($id){
+        $filier = filier::findOrFail($id);
+        $filier->delete();
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    public function update(Request $request , $f_id){
+        
+        $validator = Validator::make($request->all(),[
+            'name'=>'string|required',
+            'description'=>'string|required',
+           
+           
+        ]);
+      if($validator->fails()) {
+          return response()->json(['status'=>'error' , 'errors'=>$validator->errors()]);
+      }
+      $filier  =  Filier::findOrFail($f_id);
+       
+            $filier->name=$request->name;
+            $filier->description=$request->description;
+            $filier->save();
+           
+    
+       
+        return response()->json(['status' => 'succes' , 'data' =>$filier]);
+        }
 }

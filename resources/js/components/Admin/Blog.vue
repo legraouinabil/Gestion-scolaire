@@ -6,7 +6,7 @@
                  <div class="iq-card-header d-flex justify-content-between">
                 
                     <div class="iq-header-title">
-                       <h4 class="card-title">filier List</h4>
+                       <h4 class="card-title">blog List</h4>
                       
                     </div>
                     <div class="d-flex justify-content-end">
@@ -47,25 +47,25 @@
                          <thead>
                              <tr>
                                 <th>image</th>
-                                <th>Name</th>
+                                <th>title</th>
                                 <th>small_description</th>
-                               <th>formation</th>
+                            
                                 <th>Action</th>
                              </tr>
                          </thead>
                          <tbody>
 
-                             <tr v-for="filier in filiers " :key="filier.id" >
-                                <td class="text-center"><img class="rounded-circle img-fluid avatar-60" :src="filier.image" alt="profile"></td>
-                                <td>{{filier.name}}</td>
-                                <td>{{filier.small_description}}</td>
-                                 <td>formation</td>
+                             <tr v-for="blog in blogs " :key="blog.id" >
+                                <td class="text-center"><img class="rounded-circle img-fluid avatar-60" :src="'/img/blog/'+blog.image" alt="profile"></td>
+                                <td>{{blog.title}}</td>
+                                <td>{{blog.description}}</td>
+                              
                                
                                 <td>
                                    <div class="flex align-items-center list-user-action">
                                     
-                                      <a class="iq-bg-primary" data-toggle="modal" data-placement="top" title="" data-original-title="Edit"  data-target="#modelId" @click="editfilier(filier)" ><i class="ri-pencil-line"></i></a>
-                                      <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title=""     data-original-title="Delete" @click="deletefilier(filier.id)"><i class="ri-delete-bin-line"></i></a>
+                                      <a class="iq-bg-primary" data-toggle="modal" data-placement="top" title="" data-original-title="Edit"  data-target="#modelId" @click="editblog(blog)" ><i class="ri-pencil-line"></i></a>
+                                      <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title=""     data-original-title="Delete" @click="deleteblog(blog.id)"><i class="ri-delete-bin-line"></i></a>
                                    </div>
                                 </td>
                              </tr>
@@ -94,32 +94,56 @@
          <div class="modal-dialog" role="document">
             <div class="modal-content">
                <div class="modal-header">
-                 <h5 v-if="edit" class="modal-title">Edit filier</h5>
-                  <h5  v-else class="modal-title">Add filier</h5>
+                 <h5 v-if="edit" class="modal-title">Edit blog</h5>
+                  <h5  v-else class="modal-title">Add blog</h5>
                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                      </button>
                </div>
                <div class="modal-body">
-                 <div class="form-group">
-                   <label for="">filier name</label>
-                   <input type="text" name="" id="" :class="['form-control' , errors.name?'is-invalid' :'']" placeholder="" aria-describedby="helpId" v-model="filier.name">
-                   <small id="helpId" class="text-muted">Help text</small>
-                 </div>
-                 <div class="form-group">
-                  <label for="">filier description</label>
-                <textarea name="" id="" cols="30" rows="10" :class="['form-control' ,errors.name?'is-invalid' :'']" v-model="filier.description">
+                  <div class="card-body">
+          
+
+            <div v-if="strSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <strong>{{strSuccess}}</strong>
+            </div>
+
+            <div v-if="strError" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <strong>{{strError}}</strong>
+            </div>
 
 
-                </textarea>
-                  <small id="helpId" class="text-muted">Help text</small>
+            <form @submit.prevent="addPost" enctype="multipart/form-data">
+                <div class="form-group mb-2">
+                    <label>Name</label><span class="text-danger"> *</span>
+                    <input type="text" class="form-control" v-model="title" placeholder="Enter post name">
                 </div>
-               </div>
-               <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>
-                   <button  v-if="edit" type="button" class="btn btn-primary" @click="updatefilier">Update</button>
-                  <button  v-else type="button" class="btn btn-primary" @click="addfilier">Save</button>
 
+                <div class="form-group mb-2">
+                    <label>Name</label><span class="text-danger"> *</span>
+                   <textarea class="form-control" rows="3" v-model="description" placeholder="Enter post description"></textarea>
+                </div>
+
+                <div class="form-gorup mb-2">
+                    <label>Image</label><span class="text-danger"> *</span>
+                    <input type="file" class="form-control mb-2" v-on:change="onChange">
+
+                    <div v-if="img">
+                        <img v-bind:src="imgPreview" width="100" height="100"/>
+                    </div>
+                </div>
+              <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>
+                <button type="submit" class="btn btn-primary mt-4 mb-4"> Add Post</button>
+               </div>
+            </form>
+            
+        </div>
+               </div>
+             
+                 
                </div>
             </div>
          </div>
@@ -133,17 +157,15 @@ export default {
     data() {
         return {
           
-            filiers:{},
-            filier : {
-                id: '',
-                name :'',
-                small_description :'',
-                 img :'',
-                  description :'',
-                  
-              
-
-              },
+            blogs:{},
+          
+             id: '',
+             title :'',
+             img :'',
+             description :'',        
+            strSuccess: '',
+            strError: '',
+            imgPreview: null,
               edit:false,
               errors:[],
         }
@@ -151,45 +173,76 @@ export default {
     
  
     created(){
-     this.getfilier()
+     this.getblog()
  },
   methods:{
-    getfilier(){
-              axios.get('/api/admin/filier/index')
+
+ onChange(e) {
+            this.img = e.target.files[0];
+            let reader = new FileReader();
+            reader.addEventListener("load", function () {
+                this.imgPreview = reader.result;
+            }.bind(this), false);
+
+            if (this.img) {
+                if ( /\.(jpe?g|png|gif)$/i.test( this.img.name ) ) {
+                    reader.readAsDataURL( this.img );
+                }
+            }
+        },
+
+    addPost(e) {
+          
+                let existingObj = this;
+                const config = {
+                    headers: {
+                        'content-type': 'multipart/form-data'
+                    }
+                }
+
+                const formData = new FormData();
+                formData.append('title', this.title);
+                formData.append('description', this.description);
+                formData.append('image', this.img);
+               
+
+                axios.post('/api/admin/blog/store', formData, config)
+                .then(response => {
+                    existingObj.strError = "";
+                    existingObj.strSuccess = response.data.success;
+
+                          console.log("ok");        
+                 Toast.fire({
+                     icon: 'success',
+                     title: ' blog updated successfully'
+                   });
+                     this.getblog();
+                   this.closeModal();
+                })
+                .catch(function(error) {
+                    existingObj.strSuccess ="";
+                    existingObj.strError = error.response.data.message;
+                });
+          
+        },
+
+   //////////////////////////////////
+    getblog(){
+              axios.get('/api/admin/blog/index')
               .then(response => {
                   console.log(response.data);
-                  this.filiers =response.data;
+                  this.blogs =response.data;
                 
                  
               })
               .catch(err => console.log(err));
           },
-          addfilier(){
-            axios.post('/api/admin/filier/store' , this.filier).
-            then(res => {
-                if(res.data.status =='error'){
-                    this.errors =res.data.errors;
-                    console.log(this.errors.name[0]); 
-                  }
-                  else if(res.data.status =='succes'){
-                    
-                    console.log("ok");        
-                 Toast.fire({
-                     icon: 'success',
-                     title: ' filier added successfully'
-                   });
-                   this.closeModal();
-                }
-          
-            this.getfilier();
-               
-            }).catch(err =>console.log(err));
-          },
+    
           closeModal() {
             document.getElementById('close').click();
          },
 
-         deletefilier(id){
+         deleteblog(id){
                   Swal.fire({
           title: 'Are you sure?',
           text: "You won't be able to revert this!",
@@ -200,10 +253,10 @@ export default {
           confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
         if (result.isConfirmed) {
-          axios.delete(`/api/admin/filier/delete/${id}`).
+          axios.delete(`/api/admin/blog/delete/${id}`).
           then(res => {
 
-          this.getfilier();
+          this.getblog();
              
           }).catch(err =>console.log(err));
           Swal.fire(
@@ -216,31 +269,31 @@ export default {
           
         },
 
-        editfilier(f){
-          this.filier = f;
+        editblog(f){
+          this.blog = f;
           this.edit = true;
         },
-          updatefilier(){
-            axios.put('/api/admin/filier/update/'+this.filier.id , this.filier).
+          updateblog(){
+            axios.put('/api/admin/blog/update/'+this.blog.id , this.blog).
             then(res => {
                 if(res.data.status =='error'){
                     this.errors =res.data.errors;
-                    console.log(this.errors.name[0]); 
+                    console.log(this.errors.title[0]); 
                   }
                   else if(res.data.status =='succes'){
                     
                     console.log("ok");        
                  Toast.fire({
                      icon: 'success',
-                     title: ' filier updated successfully'
+                     title: ' blog updated successfully'
                    });
-                     this.getfilier();
+                     this.getblog();
                    this.closeModal();
                 }
                
-           this.filier ={
+           this.blog ={
                 id: '',
-                name :'',
+                title :'',
                 description :''
               
 

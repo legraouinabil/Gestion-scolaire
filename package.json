@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.7.8"
     },
     "dependencies": {
+        "laravel-vue-pagination": "^3.0.0",
         "sweetalert2": "^11.4.26",
         "vue-router": "^4.1.3"
     }

@@ -4,7 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\SiteController;
 use App\Http\Controllers\Backend\DashbordController;
 use App\Http\Controllers\Backend\FormationController;
-
+use App\Http\Controllers\Backend\FilierController;
+use App\Http\Controllers\Backend\BlogController;
+use App\Http\Controllers\Backend\StagaireController;
+use App\Http\Controllers\Backend\FormateurController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,3 +41,7 @@ Route::get('/admin/index' , [DashbordController ::class , 'index'])->name('back.
 
 
 Route::get('/admin/formation', [FormationController::class, 'view'])->name('admin.formation');
+Route::get('/admin/filier', [FilierController::class, 'view'])->name('admin.filier');
+Route::get('/admin/blog', [BlogController::class, 'view'])->name('admin.blog');
+Route::get('/admin/stagaire', [StagaireController::class, 'view'])->name('admin.stagaire');
+Route::get('/admin/formateur', [FormateurController::class, 'view'])->name('admin.formateur');

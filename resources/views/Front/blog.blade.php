@@ -23,7 +23,7 @@
             @foreach ($blogs as $blog)
             <div class="col-md-6 col-lg-4 ftco-animate">
                 <div class="blog-entry">
-                  <a href="blog-single.html" class="block-20 d-flex align-items-end" style="background-image: url({{$blog->image}});">
+                  <a href="blog-single.html" class="block-20 d-flex align-items-end" style="background-image: url({{asset('/img/blog/'.$blog->image)}});">
                                     <div class="meta-date text-center p-2">
                       <span class="day">26</span>
                       <span class="mos">June</span>
