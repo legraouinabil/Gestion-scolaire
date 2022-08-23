@@ -119,6 +119,7 @@
                 <div class="form-group mb-2">
                     <label>Name</label><span class="text-danger"> *</span>
                     <input type="text" class="form-control" v-model="title" placeholder="Enter post name">
+                      <span v-if="errors.name" :class="['label label-danger']">@{{ errors.name[0] }}</span>
                 </div>
 
                 <div class="form-group mb-2">
@@ -209,7 +210,8 @@ export default {
 
                 axios.post('/api/admin/blog/store', formData, config)
                 .then(response => {
-                    existingObj.strError = "";
+                  if(response.data.success){
+                           existingObj.strError = "";
                     existingObj.strSuccess = response.data.success;
 
                           console.log("ok");        
@@ -219,10 +221,12 @@ export default {
                    });
                      this.getblog();
                    this.closeModal();
+                  }
+              
                 })
                 .catch(function(error) {
                     existingObj.strSuccess ="";
-                    existingObj.strError = error.response.data.message;
+                  this.errors = error.response.data;
                 });
           
         },

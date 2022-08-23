@@ -5314,20 +5314,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       formData.append('description', this.description);
       formData.append('image', this.img);
       axios.post('/api/admin/blog/store', formData, config).then(function (response) {
-        existingObj.strError = "";
-        existingObj.strSuccess = response.data.success;
-        console.log("ok");
-        Toast.fire({
-          icon: 'success',
-          title: ' blog updated successfully'
-        });
+        if (response.data.success) {
+          existingObj.strError = "";
+          existingObj.strSuccess = response.data.success;
+          console.log("ok");
+          Toast.fire({
+            icon: 'success',
+            title: ' blog updated successfully'
+          });
 
-        _this.getblog();
+          _this.getblog();
 
-        _this.closeModal();
+          _this.closeModal();
+        }
       })["catch"](function (error) {
         existingObj.strSuccess = "";
-        existingObj.strError = error.response.data.message;
+        this.errors = error.response.data;
       });
     },
     //////////////////////////////////
@@ -5866,7 +5868,9 @@ var render = function render() {
         _vm.title = $event.target.value;
       }
     }
-  })]), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _vm.errors.name ? _c("span", {
+    "class": ["label label-danger"]
+  }, [_vm._v("@" + _vm._s(_vm.errors.name[0]))]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "form-group mb-2"
   }, [_c("label", [_vm._v("Name")]), _c("span", {
     staticClass: "text-danger"
