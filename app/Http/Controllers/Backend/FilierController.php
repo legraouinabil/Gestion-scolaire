@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Filier;
+use App\Models\Formation;
+use Illuminate\Support\Facades\Validator;
 
 class FilierController extends Controller
 {
@@ -22,55 +24,72 @@ class FilierController extends Controller
     public function index()
     {
       
-        $data= Filier::orderBy('id' , 'desc')->get();
+        $data['filier']= Filier::orderBy('id' , 'desc')->get();
+        $data['formation']= Formation::select('id' , 'name')->orderBy('id' , 'desc')->get();
+
+        foreach($data['filier'] as $f){
+        
+            $f->setAttribute('formation', $f->formation);
+        }
         return response()->json($data);
     }
 
     public function store(Request $request){
-        
-    $validator = Validator::make($request->all(),[
-        'name'=>'string|required',
-        'description'=>'string|required',
-       
-       
-    ]);
-  if($validator->fails()) {
-      return response()->json(['status'=>'error' , 'errors'=>$validator->errors()]);
-  }
-
-    $filier = Filier::create([
-        'name'=>$request->name,
-        'description'=>$request->description,
-       
-
-    ]);
-    return response()->json(['status' => 'succes' , 'data' =>$filier]);
-    }
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+            'small_description' => 'required',
+            'dureé' => 'required',
+            'formation_id' => 'bail|required|exists:formations,id',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+    
+        $input = $request->all();
+        $imageName = NULL;
+        if ($image = $request->file('image')) {
+            $destinationPath = 'img/filier';
+            $imageName = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $imageName);
+            $input['image'] = $imageName;
+        }
+    
+        Filier::create($input);
+    
+        return response()->json(['success'=> 'Post created successfully']);
+    
+       }
 
     public function destroy($id){
         $filier = filier::findOrFail($id);
         $filier->delete();
     }
 
-    public function update(Request $request , $f_id){
-        
-        $validator = Validator::make($request->all(),[
-            'name'=>'string|required',
-            'description'=>'string|required',
-           
-           
-        ]);
-      if($validator->fails()) {
-          return response()->json(['status'=>'error' , 'errors'=>$validator->errors()]);
-      }
-      $filier  =  Filier::findOrFail($f_id);
-       
-            $filier->name=$request->name;
-            $filier->description=$request->description;
-            $filier->save();
-           
+   
+
+    public function update(Request $request , $id){
+        $f = Filier::find($id);
+    $request->validate([
+        'name' => 'required',
+        'description' => 'required',
+        'small_description' => 'required',
+        'dureé' => 'required',
+        'formation_id' => 'bail|required|exists:formations,id',
+      
+    ]);
+
+    $input = $request->all();
+    $imageName = NULL;
+    if ($image = $request->file('file')) {
+        $destinationPath = 'img/filier/';
+        $imageName = date('YmdHis') . "." . $image->getClientOriginalExtension();
+        $image->move($destinationPath, $imageName);
+        $input['image'] = $imageName;
+        unlink('img/filier/'.$f->image);
+    }
     
-       
-        return response()->json(['status' => 'succes' , 'data' =>$filier]);
+    $f->update($input);
+
+    return response()->json(['success'=> 'Post update successfully']);
+    
         }
 }

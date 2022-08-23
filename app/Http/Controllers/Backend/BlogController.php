@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Blog;
+use Illuminate\Contracts\Validation\Validator;
 
 class BlogController extends Controller
 {
@@ -53,26 +54,26 @@ class BlogController extends Controller
        $blog->delete();
    }
 
-   public function update(Request $request , $f_id){
-       
-       $validator = Validator::make($request->all(),[
-           'name'=>'string|required',
-           'description'=>'string|required',
-          
-          
-       ]);
-     if($validator->fails()) {
-         return response()->json(['status'=>'error' , 'errors'=>$validator->errors()]);
-     }
-     $blog  =  Blog::findOrFail($f_id);
-      
-           $blog->name=$request->name;
-           $blog->description=$request->description;
-           $blog->save();
-          
-   
-      
-       return response()->json(['status' => 'succes' , 'data' =>$blog]);
-       }
-}
+   public function update(Request $request , $id){
+    $blog = Blog::find($id);
+    $request->validate([
+        'title' => 'required',
+        'description' => 'required'
+    ]);
+
+    $input = $request->all();
+    $imageName = NULL;
+    if ($image = $request->file('file')) {
+        $destinationPath = 'img/blog/';
+        $imageName = date('YmdHis') . "." . $image->getClientOriginalExtension();
+        $image->move($destinationPath, $imageName);
+        $input['image'] = $imageName;
+        unlink('img/blog/'.$blog->image);
+    }
+    
+    $blog->update($input);
+
+    return response()->json(['success'=> 'blog update successfully']);
+    
+}}
 

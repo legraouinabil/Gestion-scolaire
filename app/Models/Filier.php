@@ -9,7 +9,7 @@ class Filier extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'id',  'name' , 'description','image','dureé','formation_id'
+        'id',  'name' , 'description','image','dureé','formation_id', 'small_description'
       ];
   
       public function formation(){

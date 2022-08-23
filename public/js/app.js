@@ -5300,7 +5300,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       }
     },
-    addPost: function addPost(e) {
+    addBlog: function addBlog() {
       var _this = this;
 
       var existingObj = this;
@@ -5366,40 +5366,44 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       });
     },
-    editblog: function editblog(f) {
-      this.blog = f;
+    editblog: function editblog(b) {
+      this.id = b.id;
+      this.title = b.title;
+      this.description = b.description;
+      this.img = "/img/blog/" + b.image;
+      this.imgPreview = this.img;
       this.edit = true;
     },
     updateblog: function updateblog() {
       var _this4 = this;
 
-      axios.put('/api/admin/blog/update/' + this.blog.id, this.blog).then(function (res) {
-        if (res.data.status == 'error') {
-          _this4.errors = res.data.errors;
-          console.log(_this4.errors.title[0]);
-        } else if (res.data.status == 'succes') {
-          console.log("ok");
-          Toast.fire({
-            icon: 'success',
-            title: ' blog updated successfully'
-          });
-
-          _this4.getblog();
-
-          _this4.closeModal();
+      var existingObj = this;
+      var config = {
+        headers: {
+          'content-type': 'multipart/form-data'
         }
+      };
+      var formData = new FormData();
+      formData.append('title', this.title);
+      formData.append('description', this.description);
+      formData.append('file', this.img);
+      axios.post("/api/admin/blog/update/".concat(this.id), formData, config).then(function (response) {
+        Toast.fire({
+          icon: 'success',
+          title: ' blog updated successfully'
+        });
 
-        _this4.blog = {
-          id: '',
-          title: '',
-          description: ''
-        };
-      })["catch"](function (err) {
-        return console.log(err);
+        _this4.closeModal();
+
+        _this4.getblog();
+      })["catch"](function (error) {
+        existingObj.strSuccess = "";
+        existingObj.strError = error.response.data.message;
       });
     }
   }, "closeModal", function closeModal() {
     document.getElementById('close').click();
+    this.title = '', this.img = '', this.description = '', this.edit = false;
   })
 });
 
@@ -5416,19 +5420,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      filiers: {},
+      formations: [],
+      filiers: [],
       filier: {
-        id: '',
-        name: '',
-        small_description: '',
-        img: '',
-        description: ''
+        id: "",
+        name: "",
+        small_description: "",
+        img: "",
+        description: "",
+        dureé: "",
+        formation_id: ""
       },
+      strSuccess: "",
+      strError: "",
+      imgPreview: null,
       edit: false,
       errors: []
     };
@@ -5436,53 +5444,87 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   created: function created() {
     this.getfilier();
   },
-  methods: _defineProperty({
-    getfilier: function getfilier() {
+  methods: {
+    onChange: function onChange(e) {
+      this.filier.img = e.target.files[0];
+      var reader = new FileReader();
+      reader.addEventListener("load", function () {
+        this.imgPreview = reader.result;
+      }.bind(this), false);
+
+      if (this.filier.img) {
+        if (/\.(jpe?g|png|gif)$/i.test(this.filier.img.name)) {
+          reader.readAsDataURL(this.filier.img);
+        }
+      }
+    },
+    addFili: function addFili() {
       var _this = this;
 
-      axios.get('/api/admin/filier/index').then(function (response) {
-        console.log(response.data);
-        _this.filiers = response.data;
-      })["catch"](function (err) {
-        return console.log(err);
+      var existingObj = this;
+      var config = {
+        headers: {
+          "content-type": "multipart/form-data"
+        }
+      };
+      var formData = new FormData();
+      formData.append("name", this.filier.name);
+      formData.append("description", this.filier.description);
+      formData.append("small_description", this.filier.small_description);
+      formData.append("dureé", this.filier.dureé);
+      formData.append("formation_id", this.filier.formation_id);
+      formData.append("image", this.filier.img);
+      axios.post("/api/admin/filier/store", formData, config).then(function (response) {
+        existingObj.strError = "";
+        existingObj.strSuccess = response.data.success;
+        console.log("ok");
+        Toast.fire({
+          icon: "success",
+          title: " filier added successfully"
+        });
+
+        _this.closeModal();
+
+        _this.getfilier();
+      })["catch"](function (error) {
+        this.errors = error.response.data;
       });
     },
-    addfilier: function addfilier() {
+    getfilier: function getfilier() {
       var _this2 = this;
 
-      axios.post('/api/admin/filier/store', this.filier).then(function (res) {
-        if (res.data.status == 'error') {
-          _this2.errors = res.data.errors;
-          console.log(_this2.errors.name[0]);
-        } else if (res.data.status == 'succes') {
-          console.log("ok");
-          Toast.fire({
-            icon: 'success',
-            title: ' filier added successfully'
-          });
-
-          _this2.closeModal();
-        }
-
-        _this2.getfilier();
+      axios.get("/api/admin/filier/index").then(function (response) {
+        console.log(response.data);
+        _this2.filiers = response.data.filier;
+        _this2.formations = response.data.formation;
       })["catch"](function (err) {
         return console.log(err);
       });
     },
     closeModal: function closeModal() {
-      document.getElementById('close').click();
+      document.getElementById("close").click();
+      this.filier = {
+        id: "",
+        name: "",
+        small_description: "",
+        img: "",
+        description: "",
+        dureé: "",
+        formation_id: ""
+      };
+      this.edit = false;
     },
     deletefilier: function deletefilier(id) {
       var _this3 = this;
 
       Swal.fire({
-        title: 'Are you sure?',
+        title: "Are you sure?",
         text: "You won't be able to revert this!",
-        icon: 'warning',
+        icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
       }).then(function (result) {
         if (result.isConfirmed) {
           axios["delete"]("/api/admin/filier/delete/".concat(id)).then(function (res) {
@@ -5490,45 +5532,55 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           })["catch"](function (err) {
             return console.log(err);
           });
-          Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+          Swal.fire("Deleted!", "Your file has been deleted.", "success");
         }
       });
     },
     editfilier: function editfilier(f) {
       this.filier = f;
+      this.filier.img = "/img/filier/" + f.image;
+      console.log(this.filier.img);
+      this.imgPreview = this.filier.img;
+
+      if (this.filier.img) {
+        if (/\.(jpe?g|png|gif)$/i.test(this.filier.img.name)) {
+          reader.readAsDataURL(this.filier.img);
+        }
+      }
+
       this.edit = true;
     },
     updatefilier: function updatefilier() {
       var _this4 = this;
 
-      axios.put('/api/admin/filier/update/' + this.filier.id, this.filier).then(function (res) {
-        if (res.data.status == 'error') {
-          _this4.errors = res.data.errors;
-          console.log(_this4.errors.name[0]);
-        } else if (res.data.status == 'succes') {
-          console.log("ok");
-          Toast.fire({
-            icon: 'success',
-            title: ' filier updated successfully'
-          });
-
-          _this4.getfilier();
-
-          _this4.closeModal();
+      var existingObj = this;
+      var config = {
+        headers: {
+          "content-type": "multipart/form-data"
         }
+      };
+      var formData = new FormData();
+      formData.append("name", this.filier.name);
+      formData.append("description", this.filier.description);
+      formData.append("small_description", this.filier.small_description);
+      formData.append("dureé", this.filier.dureé);
+      formData.append("formation_id", this.filier.formation_id);
+      formData.append("file", this.filier.img);
+      axios.post("/api/admin/filier/update/" + this.filier.id, formData, config).then(function (response) {
+        console.log();
+        Toast.fire({
+          icon: "success",
+          title: " filier updated successfully"
+        });
 
-        _this4.filier = {
-          id: '',
-          name: '',
-          description: ''
-        };
-      })["catch"](function (err) {
-        return console.log(err);
+        _this4.getfilier();
+
+        _this4.closeModal();
+      })["catch"](function (error) {
+        this.errors = error.response.data;
       });
     }
-  }, "closeModal", function closeModal() {
-    document.getElementById('close').click();
-  })
+  }
 });
 
 /***/ }),
@@ -5544,16 +5596,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       formations: {},
       formation: {
-        id: '',
-        name: '',
-        description: ''
+        id: "",
+        name: "",
+        description: ""
       },
       edit: false,
       errors: []
@@ -5562,11 +5612,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   created: function created() {
     this.getFormation();
   },
-  methods: _defineProperty({
+  methods: {
     getFormation: function getFormation() {
       var _this = this;
 
-      axios.get('/api/admin/formation/index/').then(function (response) {
+      axios.get("/api/admin/formation/index/").then(function (response) {
         console.log(response.data);
         _this.formations = response.data;
       })["catch"](function (err) {
@@ -5576,16 +5626,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     addFormation: function addFormation() {
       var _this2 = this;
 
-      axios.post('/api/admin/formation/store', this.formation).then(function (res) {
-        if (res.data.status == 'error') {
+      axios.post("/api/admin/formation/store", this.formation).then(function (res) {
+        if (res.data.status == "error") {
           _this2.errors = res.data.errors;
           console.log(_this2.errors.name[0]);
-        } else if (res.data.status == 'succes') {
+        } else if (res.data.status == "succes") {
           console.log("ok");
           Toast.fire({
-            icon: 'success',
-            title: ' formation added successfully'
+            icon: "success",
+            title: " formation added successfully"
           });
+          _this2.formation = {
+            id: "",
+            name: "",
+            description: ""
+          };
 
           _this2.closeModal();
         }
@@ -5596,19 +5651,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     closeModal: function closeModal() {
-      document.getElementById('close').click();
+      document.getElementById("close").click();
+      this.formation = {
+        id: "",
+        name: "",
+        description: ""
+      };
+      this.edit = false;
+      this.getFormation();
     },
     deleteFormation: function deleteFormation(id) {
       var _this3 = this;
 
       Swal.fire({
-        title: 'Are you sure?',
+        title: "Are you sure?",
         text: "You won't be able to revert this!",
-        icon: 'warning',
+        icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
       }).then(function (result) {
         if (result.isConfirmed) {
           axios["delete"]("/api/admin/formation/delete/".concat(id)).then(function (res) {
@@ -5616,7 +5678,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           })["catch"](function (err) {
             return console.log(err);
           });
-          Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+          Swal.fire("Deleted!", "Your file has been deleted.", "success");
         }
       });
     },
@@ -5627,34 +5689,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     updateFormation: function updateFormation() {
       var _this4 = this;
 
-      axios.put('/api/admin/formation/update/' + this.formation.id, this.formation).then(function (res) {
-        if (res.data.status == 'error') {
+      axios.put("/api/admin/formation/update/" + this.formation.id, this.formation).then(function (res) {
+        if (res.data.status == "error") {
           _this4.errors = res.data.errors;
           console.log(_this4.errors.name[0]);
-        } else if (res.data.status == 'succes') {
+        } else if (res.data.status == "succes") {
           console.log("ok");
           Toast.fire({
-            icon: 'success',
-            title: ' formation updated successfully'
+            icon: "success",
+            title: " formation updated successfully"
           });
 
           _this4.getFormation();
 
           _this4.closeModal();
         }
-
-        _this4.formation = {
-          id: '',
-          name: '',
-          description: ''
-        };
       })["catch"](function (err) {
         return console.log(err);
       });
     }
-  }, "closeModal", function closeModal() {
-    document.getElementById('close').click();
-  })
+  }
 });
 
 /***/ }),
@@ -5787,17 +5841,7 @@ var render = function render() {
       "data-bs-dismiss": "alert",
       "aria-label": "Close"
     }
-  }), _vm._v(" "), _c("strong", [_vm._v(_vm._s(_vm.strError))])]) : _vm._e(), _vm._v(" "), _c("form", {
-    attrs: {
-      enctype: "multipart/form-data"
-    },
-    on: {
-      submit: function submit($event) {
-        $event.preventDefault();
-        return _vm.addPost.apply(null, arguments);
-      }
-    }
-  }, [_c("div", {
+  }), _vm._v(" "), _c("strong", [_vm._v(_vm._s(_vm.strError))])]) : _vm._e(), _vm._v(" "), _c("div", {
     staticClass: "form-group mb-2"
   }, [_c("label", [_vm._v("Name")]), _c("span", {
     staticClass: "text-danger"
@@ -5865,7 +5909,32 @@ var render = function render() {
       width: "100",
       height: "100"
     }
-  })]) : _vm._e()]), _vm._v(" "), _vm._m(5)])])])])])])])]);
+  })]) : _vm._e()]), _vm._v(" "), _c("div", {
+    staticClass: "modal-footer"
+  }, [_c("button", {
+    staticClass: "btn btn-secondary",
+    attrs: {
+      type: "button",
+      "data-dismiss": "modal",
+      id: "close"
+    }
+  }, [_vm._v("Close")]), _vm._v(" "), _vm.edit ? _c("button", {
+    staticClass: "btn btn-primary mt-4 mb-4",
+    attrs: {
+      type: "button"
+    },
+    on: {
+      click: _vm.updateblog
+    }
+  }, [_vm._v(" update blog")]) : _c("button", {
+    staticClass: "btn btn-primary mt-4 mb-4",
+    attrs: {
+      type: "button"
+    },
+    on: {
+      click: _vm.addBlog
+    }
+  }, [_vm._v(" Add blog")])])])])])])])])]);
 };
 
 var staticRenderFns = [function () {
@@ -5973,25 +6042,6 @@ var staticRenderFns = [function () {
       "aria-hidden": "true"
     }
   }, [_vm._v("×")])]);
-}, function () {
-  var _vm = this,
-      _c = _vm._self._c;
-
-  return _c("div", {
-    staticClass: "modal-footer"
-  }, [_c("button", {
-    staticClass: "btn btn-secondary",
-    attrs: {
-      type: "button",
-      "data-dismiss": "modal",
-      id: "close"
-    }
-  }, [_vm._v("Close")]), _vm._v(" "), _c("button", {
-    staticClass: "btn btn-primary mt-4 mb-4",
-    attrs: {
-      type: "submit"
-    }
-  }, [_vm._v(" Add Post")])]);
 }];
 render._withStripped = true;
 
@@ -6039,10 +6089,10 @@ var render = function render() {
     }, [_c("img", {
       staticClass: "rounded-circle img-fluid avatar-60",
       attrs: {
-        src: filier.image,
+        src: "/img/filier/" + filier.image,
         alt: "profile"
       }
-    })]), _vm._v(" "), _c("td", [_vm._v(_vm._s(filier.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(filier.small_description))]), _vm._v(" "), _c("td", [_vm._v("formation")]), _vm._v(" "), _c("td", [_c("div", {
+    })]), _vm._v(" "), _c("td", [_vm._v(_vm._s(filier.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(filier.small_description))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(filier.formation.name))]), _vm._v(" "), _c("td", [_c("div", {
       staticClass: "flex align-items-center list-user-action"
     }, [_c("a", {
       staticClass: "iq-bg-primary",
@@ -6051,7 +6101,7 @@ var render = function render() {
         "data-placement": "top",
         title: "",
         "data-original-title": "Edit",
-        "data-target": "#modelId"
+        "data-target": "#exampleModalScrollable"
       },
       on: {
         click: function click($event) {
@@ -6079,14 +6129,14 @@ var render = function render() {
   }), 0)])]), _vm._v(" "), _vm._m(3)])])]), _vm._v(" "), _c("div", {
     staticClass: "modal fade",
     attrs: {
-      id: "modelId",
+      id: "exampleModalScrollable",
       tabindex: "-1",
       role: "dialog",
-      "aria-labelledby": "modelTitleId",
+      "aria-labelledby": "exampleModalScrollableTitle",
       "aria-hidden": "true"
     }
   }, [_c("div", {
-    staticClass: "modal-dialog",
+    staticClass: "modal-dialog modal-dialog-scrollable",
     attrs: {
       role: "document"
     }
@@ -6095,10 +6145,16 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "modal-header"
   }, [_vm.edit ? _c("h5", {
-    staticClass: "modal-title"
-  }, [_vm._v("Edit filier")]) : _c("h5", {
-    staticClass: "modal-title"
-  }, [_vm._v("Add filier")]), _vm._v(" "), _vm._m(4)]), _vm._v(" "), _c("div", {
+    staticClass: "modal-title",
+    attrs: {
+      id: "exampleModalScrollableTitle"
+    }
+  }, [_vm._v("\n              update filier\n            ")]) : _c("h5", {
+    staticClass: "modal-title",
+    attrs: {
+      id: "exampleModalScrollableTitle"
+    }
+  }, [_vm._v("\n              Add filier\n            ")]), _vm._v(" "), _vm._m(4)]), _vm._v(" "), _c("div", {
     staticClass: "modal-body"
   }, [_c("div", {
     staticClass: "form-group"
@@ -6106,14 +6162,14 @@ var render = function render() {
     attrs: {
       "for": ""
     }
-  }, [_vm._v("filier name")]), _vm._v(" "), _c("input", {
+  }, [_vm._v("name")]), _vm._v(" "), _c("input", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.filier.name,
       expression: "filier.name"
     }],
-    "class": ["form-control", _vm.errors.name ? "is-invalid" : ""],
+    staticClass: "form-control",
     attrs: {
       type: "text",
       name: "",
@@ -6142,19 +6198,54 @@ var render = function render() {
     attrs: {
       "for": ""
     }
-  }, [_vm._v("filier description")]), _vm._v(" "), _c("textarea", {
+  }, [_vm._v("small_description")]), _vm._v(" "), _c("textarea", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.filier.small_description,
+      expression: "filier.small_description"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      name: "",
+      id: "",
+      cols: "30",
+      rows: "3"
+    },
+    domProps: {
+      value: _vm.filier.small_description
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+
+        _vm.$set(_vm.filier, "small_description", $event.target.value);
+      }
+    }
+  }), _vm._v(" "), _c("small", {
+    staticClass: "text-muted",
+    attrs: {
+      id: "helpId"
+    }
+  }, [_vm._v("Help text")])]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("description")]), _vm._v(" "), _c("textarea", {
     directives: [{
       name: "model",
       rawName: "v-model",
       value: _vm.filier.description,
       expression: "filier.description"
     }],
-    "class": ["form-control", _vm.errors.name ? "is-invalid" : ""],
+    staticClass: "form-control",
     attrs: {
       name: "",
       id: "",
       cols: "30",
-      rows: "10"
+      rows: "4"
     },
     domProps: {
       value: _vm.filier.description
@@ -6171,7 +6262,98 @@ var render = function render() {
     attrs: {
       id: "helpId"
     }
-  }, [_vm._v("Help text")])])]), _vm._v(" "), _c("div", {
+  }, [_vm._v("Help text")])]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("duuré")]), _vm._v(" "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.filier.dureé,
+      expression: "filier.dureé"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      type: "text",
+      name: "",
+      id: "",
+      placeholder: "",
+      "aria-describedby": "helpId"
+    },
+    domProps: {
+      value: _vm.filier.dureé
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+
+        _vm.$set(_vm.filier, "dureé", $event.target.value);
+      }
+    }
+  }), _vm._v(" "), _c("small", {
+    staticClass: "text-muted",
+    attrs: {
+      id: "helpId"
+    }
+  }, [_vm._v("Help text")])]), _vm._v(" "), _c("div", {
+    staticClass: "form-group"
+  }, [_c("label", {
+    attrs: {
+      "for": ""
+    }
+  }, [_vm._v("formation")]), _vm._v(" "), _c("select", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.filier.formation_id,
+      expression: "filier.formation_id"
+    }],
+    staticClass: "form-control",
+    attrs: {
+      name: "",
+      id: ""
+    },
+    on: {
+      change: function change($event) {
+        var $$selectedVal = Array.prototype.filter.call($event.target.options, function (o) {
+          return o.selected;
+        }).map(function (o) {
+          var val = "_value" in o ? o._value : o.value;
+          return val;
+        });
+
+        _vm.$set(_vm.filier, "formation_id", $event.target.multiple ? $$selectedVal : $$selectedVal[0]);
+      }
+    }
+  }, _vm._l(_vm.formations, function (formation) {
+    return _c("option", {
+      key: formation.id,
+      domProps: {
+        value: formation.id
+      }
+    }, [_vm._v("\n                  " + _vm._s(formation.name) + "\n                ")]);
+  }), 0)]), _vm._v(" "), _c("div", {
+    staticClass: "form-gorup mb-2"
+  }, [_c("label", [_vm._v("Image")]), _c("span", {
+    staticClass: "text-danger"
+  }, [_vm._v(" *")]), _vm._v(" "), _c("input", {
+    staticClass: "form-control mb-2",
+    attrs: {
+      type: "file"
+    },
+    on: {
+      change: _vm.onChange
+    }
+  }), _vm._v(" "), _vm.filier.img ? _c("div", [_c("img", {
+    attrs: {
+      src: _vm.imgPreview,
+      width: "100",
+      height: "100"
+    }
+  })]) : _vm._e()])]), _vm._v(" "), _c("div", {
     staticClass: "modal-footer"
   }, [_c("button", {
     staticClass: "btn btn-secondary",
@@ -6179,8 +6361,11 @@ var render = function render() {
       type: "button",
       "data-dismiss": "modal",
       id: "close"
+    },
+    on: {
+      click: _vm.closeModal
     }
-  }, [_vm._v("Close")]), _vm._v(" "), _vm.edit ? _c("button", {
+  }, [_vm._v("\n              Close\n            ")]), _vm._v(" "), _vm.edit ? _c("button", {
     staticClass: "btn btn-primary",
     attrs: {
       type: "button"
@@ -6188,15 +6373,15 @@ var render = function render() {
     on: {
       click: _vm.updatefilier
     }
-  }, [_vm._v("Update")]) : _c("button", {
+  }, [_vm._v("\n              update changes\n            ")]) : _c("button", {
     staticClass: "btn btn-primary",
     attrs: {
       type: "button"
     },
     on: {
-      click: _vm.addfilier
+      click: _vm.addFili
     }
-  }, [_vm._v("Save")])])])])])])]);
+  }, [_vm._v("\n              Save changes\n            ")])])])])])])]);
 };
 
 var staticRenderFns = [function () {
@@ -6216,14 +6401,14 @@ var staticRenderFns = [function () {
     attrs: {
       type: "button",
       "data-toggle": "modal",
-      "data-target": "#modelId"
+      "data-target": "#exampleModalScrollable"
     }
   }, [_c("i", {
     staticClass: "fa fa-plus",
     attrs: {
       "aria-hidden": "true"
     }
-  }), _vm._v("\r\n                     Add New\r\n                    ")])])]);
+  }), _vm._v("\n              Add New\n            ")])])]);
 }, function () {
   var _vm = this,
       _c = _vm._self._c;
@@ -6258,17 +6443,17 @@ var staticRenderFns = [function () {
     attrs: {
       href: "javascript:void();"
     }
-  }, [_vm._v("\r\n                                   Print\r\n                                 ")]), _vm._v(" "), _c("a", {
+  }, [_vm._v("\n                    Print\n                  ")]), _vm._v(" "), _c("a", {
     staticClass: "iq-bg-primary",
     attrs: {
       href: "javascript:void();"
     }
-  }, [_vm._v("\r\n                                   Excel\r\n                                 ")]), _vm._v(" "), _c("a", {
+  }, [_vm._v("\n                    Excel\n                  ")]), _vm._v(" "), _c("a", {
     staticClass: "iq-bg-primary",
     attrs: {
       href: "javascript:void();"
     }
-  }, [_vm._v("\r\n                                   Pdf\r\n                                 ")])])])]);
+  }, [_vm._v(" Pdf ")])])])]);
 }, function () {
   var _vm = this,
       _c = _vm._self._c;
@@ -6483,8 +6668,11 @@ var render = function render() {
       type: "button",
       "data-dismiss": "modal",
       id: "close"
+    },
+    on: {
+      click: _vm.closeModal
     }
-  }, [_vm._v("Close")]), _vm._v(" "), _vm.edit ? _c("button", {
+  }, [_vm._v("\n              Close\n            ")]), _vm._v(" "), _vm.edit ? _c("button", {
     staticClass: "btn btn-primary",
     attrs: {
       type: "button"
@@ -6492,7 +6680,7 @@ var render = function render() {
     on: {
       click: _vm.updateFormation
     }
-  }, [_vm._v("Update")]) : _c("button", {
+  }, [_vm._v("\n              Update\n            ")]) : _c("button", {
     staticClass: "btn btn-primary",
     attrs: {
       type: "button"
@@ -6500,7 +6688,7 @@ var render = function render() {
     on: {
       click: _vm.addFormation
     }
-  }, [_vm._v("Save")])])])])])])]);
+  }, [_vm._v("\n              Save\n            ")])])])])])])]);
 };
 
 var staticRenderFns = [function () {
@@ -6527,7 +6715,7 @@ var staticRenderFns = [function () {
     attrs: {
       "aria-hidden": "true"
     }
-  }), _vm._v("\r\n                     Add New\r\n                    ")])])]);
+  }), _vm._v("\n              Add New\n            ")])])]);
 }, function () {
   var _vm = this,
       _c = _vm._self._c;
@@ -6562,17 +6750,17 @@ var staticRenderFns = [function () {
     attrs: {
       href: "javascript:void();"
     }
-  }, [_vm._v("\r\n                                   Print\r\n                                 ")]), _vm._v(" "), _c("a", {
+  }, [_vm._v("\n                    Print\n                  ")]), _vm._v(" "), _c("a", {
     staticClass: "iq-bg-primary",
     attrs: {
       href: "javascript:void();"
     }
-  }, [_vm._v("\r\n                                   Excel\r\n                                 ")]), _vm._v(" "), _c("a", {
+  }, [_vm._v("\n                    Excel\n                  ")]), _vm._v(" "), _c("a", {
     staticClass: "iq-bg-primary",
     attrs: {
       href: "javascript:void();"
     }
-  }, [_vm._v("\r\n                                   Pdf\r\n                                 ")])])])]);
+  }, [_vm._v(" Pdf ")])])])]);
 }, function () {
   var _vm = this,
       _c = _vm._self._c;

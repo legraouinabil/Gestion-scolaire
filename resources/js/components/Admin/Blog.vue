@@ -115,7 +115,7 @@
             </div>
 
 
-            <form @submit.prevent="addPost" enctype="multipart/form-data">
+         
                 <div class="form-group mb-2">
                     <label>Name</label><span class="text-danger"> *</span>
                     <input type="text" class="form-control" v-model="title" placeholder="Enter post name">
@@ -136,9 +136,10 @@
                 </div>
               <div class="modal-footer">
                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>
-                <button type="submit" class="btn btn-primary mt-4 mb-4"> Add Post</button>
+                <button  v-if="edit" type="button" class="btn btn-primary mt-4 mb-4" @click="updateblog"> update blog</button>
+                <button v-else type="button" class="btn btn-primary mt-4 mb-4" @click="addBlog"> Add blog</button>
                </div>
-            </form>
+           
             
         </div>
                </div>
@@ -149,7 +150,7 @@
          </div>
         </div>
      </div>
-</div>
+
 </template>
 <script>
 
@@ -191,7 +192,7 @@ export default {
             }
         },
 
-    addPost(e) {
+    addBlog() {
           
                 let existingObj = this;
                 const config = {
@@ -269,43 +270,50 @@ export default {
           
         },
 
-        editblog(f){
-          this.blog = f;
+        editblog(b){
+          this.id = b.id;
+          this.title = b.title;
+         this.description = b.description;
+           this.img = "/img/blog/"+b.image;
+           this.imgPreview = this.img;
           this.edit = true;
         },
           updateblog(){
-            axios.put('/api/admin/blog/update/'+this.blog.id , this.blog).
-            then(res => {
-                if(res.data.status =='error'){
-                    this.errors =res.data.errors;
-                    console.log(this.errors.title[0]); 
-                  }
-                  else if(res.data.status =='succes'){
-                    
-                    console.log("ok");        
-                 Toast.fire({
+              let existingObj = this;
+                const config = {
+                    headers: {
+                        'content-type': 'multipart/form-data'
+                    }
+                }
+
+                const formData = new FormData();
+                formData.append('title', this.title);
+                formData.append('description', this.description);
+                formData.append('file', this.img);
+
+              axios.post(`/api/admin/blog/update/${this.id}`, formData, config)
+                .then(response => {
+                  Toast.fire({
                      icon: 'success',
                      title: ' blog updated successfully'
                    });
-                     this.getblog();
-                   this.closeModal();
-                }
-               
-           this.blog ={
-                id: '',
-                title :'',
-                description :''
-              
-
-              }
-           
-               
-            }).catch(err =>console.log(err));
-           
+                     this.closeModal();
+              this.getblog();
+                 
+                })
+                .catch(function(error) {
+                    existingObj.strSuccess ="";
+                    existingObj.strError = error.response.data.message;
+                });
+            
           },
           
           closeModal() {
             document.getElementById('close').click();
+                this.title ='',
+             this.img ='',
+             this.description='',    
+             this.edit = false;
          },
        
       }
