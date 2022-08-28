@@ -17,7 +17,7 @@ class FormateurController extends Controller
      */
 
     public function view(){
-        return view("Back.formateur.index");
+        return view("Back.Admin.formateur.index");
     }
 
 
