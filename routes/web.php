@@ -6,8 +6,12 @@ use App\Http\Controllers\Backend\DashbordController;
 use App\Http\Controllers\Backend\FormationController;
 use App\Http\Controllers\Backend\FilierController;
 use App\Http\Controllers\Backend\BlogController;
+use App\Http\Controllers\Backend\Formateur\DashbordController as FormateurDashbordController;
 use App\Http\Controllers\Backend\StagaireController;
 use App\Http\Controllers\Backend\FormateurController;
+use App\Http\Controllers\Backend\ModuleController;
+use App\Http\Controllers\Backend\Stagaire\DashbordController as StagaireDashbordController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,12 +40,23 @@ Route::get('/notfound' ,function(){
 });
 
 
+Route::middleware('auth:admin')->group(function(){
+    Route::get('/admin/index' , [DashbordController ::class , 'index'])->name('back.home');
 
-Route::get('/admin/index' , [DashbordController ::class , 'index'])->name('back.home');
 
+    Route::get('/admin/formation', [FormationController::class, 'view'])->name('admin.formation');
+    Route::get('/admin/filier', [FilierController::class, 'view'])->name('admin.filier');
+    Route::get('/admin/blog', [BlogController::class, 'view'])->name('admin.blog');
+    Route::get('/admin/stagaire', [StagaireController::class, 'view'])->name('admin.stagaire');
+    Route::get('/admin/formateur', [FormateurController::class, 'view'])->name('admin.formateur');
+    Route::get('/admin/module', [ModuleController::class, 'view'])->name('admin.module');
+    
+});
 
-Route::get('/admin/formation', [FormationController::class, 'view'])->name('admin.formation');
-Route::get('/admin/filier', [FilierController::class, 'view'])->name('admin.filier');
-Route::get('/admin/blog', [BlogController::class, 'view'])->name('admin.blog');
-Route::get('/admin/stagaire', [StagaireController::class, 'view'])->name('admin.stagaire');
-Route::get('/admin/formateur', [FormateurController::class, 'view'])->name('admin.formateur');
+Route::middleware('auth:formateur')->group(function(){
+Route::get('/formateur/index' , [FormateurDashbordController ::class , 'view'])->name('back.formateur.home');
+});
+
+Route::middleware('auth:stagaire')->group(function(){
+Route::get('/stagaire/index' , [StagaireDashbordController ::class , 'view'])->name('back.stagaire.home');
+});

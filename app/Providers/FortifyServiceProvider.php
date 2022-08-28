@@ -28,6 +28,14 @@ class FortifyServiceProvider extends ServiceProvider
             Config::set('fortify.guard' ,'formateur');
             Config::set('fortify.prefix' ,'formateur');
         }
+        if($request->is('stagaire/*')){
+            Config::set('fortify.guard' ,'stagaire');
+            Config::set('fortify.prefix' ,'stagaire');
+        }
+        if($request->is('admin/*')){
+            Config::set('fortify.guard' ,'admin');
+            Config::set('fortify.prefix' ,'admin');
+        }
     }
 
     /**

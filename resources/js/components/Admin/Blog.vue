@@ -119,7 +119,7 @@
                 <div class="form-group mb-2">
                     <label>Name</label><span class="text-danger"> *</span>
                     <input type="text" class="form-control" v-model="title" placeholder="Enter post name">
-                      <span v-if="errors.name" :class="['label label-danger']">@{{ errors.name[0] }}</span>
+                      <span v-if="errors.title" :class="['label label-danger']">{{ errors.title[0] }}</span>
                 </div>
 
                 <div class="form-group mb-2">
@@ -210,11 +210,12 @@ export default {
 
                 axios.post('/api/admin/blog/store', formData, config)
                 .then(response => {
+                
                   if(response.data.success){
                            existingObj.strError = "";
                     existingObj.strSuccess = response.data.success;
 
-                          console.log("ok");        
+                                 
                  Toast.fire({
                      icon: 'success',
                      title: ' blog updated successfully'
@@ -226,7 +227,7 @@ export default {
                 })
                 .catch(function(error) {
                     existingObj.strSuccess ="";
-                  this.errors = error.response.data;
+                  existingObj.strError = error.response.data.message;
                 });
           
         },

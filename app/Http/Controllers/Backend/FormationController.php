@@ -17,7 +17,7 @@ class FormationController extends Controller
      */
 
     public function view(){
-        return view("Back.formation.index");
+        return view("Back.Admin.formation.index");
     }
 
 

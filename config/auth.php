@@ -44,6 +44,14 @@ return [
             'driver' => 'session',
             'provider' => 'formateurs',
         ],
+        'stagaire' => [
+            'driver' => 'session',
+            'provider' => 'stagaires',
+        ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
     ],
 
     /*
@@ -71,6 +79,14 @@ return [
         'formateurs' => [
             'driver' => 'eloquent',
             'model' => App\Models\Formateur::class,
+        ],
+        'stagaires' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Stagaire::class,
+        ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
         ],
 
         // 'users' => [

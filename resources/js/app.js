@@ -9,7 +9,6 @@ require('./bootstrap');
 window.Vue = require('vue').default;
 
 
-
 import Swal from 'sweetalert2'
 window.Swal = Swal
 const Toast = Swal.mixin({
@@ -25,13 +24,19 @@ const Toast = Swal.mixin({
   })
   window.Toast=Toast
 
-  
+
 import formation  from './components/Admin/Formation.vue';
+import module  from './components/Admin/Module.vue';
+import stagaire  from './components/Admin/Stagaire.vue';
+import formateur  from './components/Admin/Formateur.vue';
 import filier  from './components/Admin/Filier.vue';
 import blog  from './components/Admin/Blog.vue';
 /////////////////////////////////
 
+Vue.component('Module',module);
 Vue.component('Formation',formation);
+Vue.component('Stagaire',stagaire);
+Vue.component('Formateur',formateur);
 Vue.component('Filier',filier);
 Vue.component('Blog',blog);
 

@@ -5,8 +5,12 @@
     
 
 
-<formation></formation>
+<h1>
+    stagaire
+</h1>
 
+
+   
 
 
 @endsection

@@ -17,7 +17,7 @@ class ModulFactory extends Factory
         return [
             'name'  => $name,
             'description'  =>$this->faker->paragraph(),
-            'nbHours'  => $this->faker->date(),
+            'nbHours'  => $this->faker->randomNumber(),
             'filier_id'  =>$this->faker->numberBetween(1,9),
             'cofession'  =>$this->faker->numberBetween(1,3),
            

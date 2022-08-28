@@ -61,17 +61,13 @@
                     <th>Name</th>
                     <th>description</th>
 
-                    <th class="w-20">Action</th>
+                    <th >Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr v-for="formation in formations" :key="formation.id">
                     <td class="text-center">
-                      <img
-                        class="rounded-circle img-fluid avatar-40"
-                        src="images/user/01.jpg"
-                        alt="profile"
-                      />
+                     {{ formation.id }}
                     </td>
                     <td>{{ formation.name }}</td>
                     <td>{{ formation.description }}</td>

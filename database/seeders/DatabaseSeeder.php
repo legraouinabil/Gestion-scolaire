@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
            
             FormationSeeder::class,
-           
+           AdminSeeder::class,
             FilierSeeder::class,
             FormateurSeeder::class,
             ModulsSeeder::class,

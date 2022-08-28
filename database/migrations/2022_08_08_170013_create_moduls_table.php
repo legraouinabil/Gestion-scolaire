@@ -17,7 +17,7 @@ class CreateModulsTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->dateTime('nbHours');
+            $table->integer('nbHours');
           
             $table->integer('cofession');
             $table->unsignedBigInteger('filier_id')->nullable();

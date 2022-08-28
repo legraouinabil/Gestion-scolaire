@@ -5,6 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\FormationController;
 use App\Http\Controllers\Backend\FilierController;
 use App\Http\Controllers\Backend\BlogController;
+use App\Http\Controllers\Backend\FormateurController;
+use App\Http\Controllers\Backend\StagaireController;
+use App\Http\Controllers\Backend\ModuleController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -47,9 +51,20 @@ Route::get('/admin/formateur/create', [FormateurController::class, 'create'])->n
 Route::post('/admin/formateur/store', [FormateurController::class, 'store'])->name('admin.formateur.store');
 Route::delete('/admin/formateur/delete/{id}', [FormateurController::class, 'destroy'])->name('admin.formateur.delete');
 Route::post('/admin/formateur/update/{id}', [FormateurController::class, 'update'])->name('admin.formateur.update');
+Route::get('/admin/formateur/getfilier/{id}', [FormateurController::class, 'droopDownfilier'])->name('admin.formateur.update');
 
 Route::get('/admin/stagaire/index', [StagaireController::class, 'index'])->name('admin.stagaire.index');
 Route::get('/admin/stagaire/create', [StagaireController::class, 'create'])->name('admin.stagaire.create');
 Route::post('/admin/stagaire/store', [StagaireController::class, 'store'])->name('admin.stagaire.store');
 Route::delete('/admin/stagaire/delete/{id}', [StagaireController::class, 'destroy'])->name('admin.stagaire.delete');
 Route::post('/admin/stagaire/update/{id}', [StagaireController::class, 'update'])->name('admin.stagaire.update');
+Route::get('/admin/stagaire/getfilier/{id}', [StagaireController::class, 'droopDownfilier'])->name('admin.stagaire.update');
+
+Route::get('/admin/module/index', [ModuleController::class, 'index'])->name('admin.module.index');
+Route::get('/admin/module/create', [ModuleController::class, 'create'])->name('admin.module.create');
+Route::post('/admin/module/store', [ModuleController::class, 'store'])->name('admin.module.store');
+Route::delete('/admin/module/delete/{id}', [ModuleController::class, 'destroy'])->name('admin.module.delete');
+Route::put('/admin/module/update/{id}', [ModuleController::class, 'update'])->name('admin.module.update');
+
+
+Route::get('/admin/module/getfilier/{id}', [FormateurController::class, 'droopDownfilier']);

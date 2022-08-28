@@ -17,7 +17,7 @@ class FilierController extends Controller
      */
 
     public function view(){
-        return view("Back.filier.index");
+        return view("Back.Admin.filier.index");
     }
 
 

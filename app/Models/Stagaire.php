@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Stagaire extends Model
 {
@@ -15,6 +16,7 @@ class Stagaire extends Model
   
       public function filier(){
           return $this->belongsTo(Filier::class);
+
       }
 
 }
