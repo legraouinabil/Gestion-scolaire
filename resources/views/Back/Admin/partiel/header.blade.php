@@ -16,7 +16,9 @@
       <!-- Responsive CSS -->
       <link rel="stylesheet" href="{{asset('back/css/responsive.css')}}">
       <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
+      @yield('style')
    </head>
+
    <body>
 
                         

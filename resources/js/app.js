@@ -30,9 +30,15 @@ import module  from './components/Admin/Module.vue';
 import stagaire  from './components/Admin/Stagaire.vue';
 import formateur  from './components/Admin/Formateur.vue';
 import filier  from './components/Admin/Filier.vue';
-import blog  from './components/Admin/Blog.vue';
+import blog  from './components/Admin/Blog.vue';////
+/////////////////////////////////////////////////////////////
+
+import course  from './components/Formateur/Course.vue';
 /////////////////////////////////
 
+
+
+Vue.component('Course',course);
 Vue.component('Module',module);
 Vue.component('Formation',formation);
 Vue.component('Stagaire',stagaire);

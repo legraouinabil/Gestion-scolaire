@@ -58,12 +58,13 @@ class BlogController extends Controller
     $blog = Blog::find($id);
     $request->validate([
         'title' => 'required',
-        'description' => 'required'
+        'description' => 'required',
+        'image' => 'nullable'
     ]);
 
     $input = $request->all();
     $imageName = NULL;
-    if ($image = $request->file('file')) {
+    if ($image = $request->file('image')) {
         $destinationPath = 'img/blog/';
         $imageName = date('YmdHis') . "." . $image->getClientOriginalExtension();
         $image->move($destinationPath, $imageName);

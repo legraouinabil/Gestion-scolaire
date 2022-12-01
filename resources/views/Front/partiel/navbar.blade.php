@@ -24,9 +24,21 @@
                     </div>
                     <div class="col-md topper d-flex align-items-center justify-content-end">
                         <p class="mb-0">
-                            <a href="/login" class="btn py-2 px-3 btn-primary d-flex align-items-center justify-content-center">
-                                <span>Apply now</span>
-                            </a>
+                          @if (Auth::guard('stagaire')->check() || Auth::guard('formateur')->check() )
+                          
+                          <form action=" {{route('logout')}}  " method="POST">
+                            @csrf
+                    <button class="btn py-2 px-3 btn-primary d-flex align-items-center justify-content-center" type="submit">
+                        <i class="fas fa-unlock"></i>
+                        <span>log out</span>
+                      </button>
+                    
+                    </form>
+                            @else
+                            <a href="/stagaire/login" class="btn py-2 px-3 btn-primary d-flex align-items-center justify-content-center">
+                              <span>Apply Now</span>
+                          </a>
+                            @endif
                         </p>
                     </div>
                 </div>
@@ -72,6 +84,13 @@
           
             <li class="nav-item"><a href=" {{route('front.blog')}}" class="nav-link">Blog</a></li>
           <li class="nav-item"><a href="  {{route('front.cantact')}} " class="nav-link">Contact</a></li>
+          @if (Auth::guard('stagaire')->check())
+          <li class="nav-item"><a href="   " class="nav-link">Courses</a></li>
+         @endif
+         @if (Auth::guard('formateur')->check())
+         <li class="nav-item"><a href="   "class="nav-link">Dashbord</a></li>
+        @endif
+
         </ul>
       </div>
     </div>

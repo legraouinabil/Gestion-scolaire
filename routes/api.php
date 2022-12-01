@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\FormationController;
 use App\Http\Controllers\Backend\FilierController;
 use App\Http\Controllers\Backend\BlogController;
+use App\Http\Controllers\Backend\Formateur\CourseController;
 use App\Http\Controllers\Backend\FormateurController;
 use App\Http\Controllers\Backend\StagaireController;
 use App\Http\Controllers\Backend\ModuleController;
@@ -68,3 +69,13 @@ Route::put('/admin/module/update/{id}', [ModuleController::class, 'update'])->na
 
 
 Route::get('/admin/module/getfilier/{id}', [FormateurController::class, 'droopDownfilier']);
+
+
+//Route Formateur
+
+
+Route::get('/formateur/course/index', [CourseController::class, 'index'])->name('formateur.course.index');
+Route::get('/formateur/course/create', [CourseController::class, 'create'])->name('formateur.course.create');
+Route::post('/formateur/course/store', [CourseController::class, 'store'])->name('formateur.course.store');
+Route::delete('/formateur/course/delete/{id}', [CourseController::class, 'destroy'])->name('formateur.course.delete');
+Route::put('/formateur/course/update/{id}', [CourseController::class, 'update'])->name('formateur.course.update');

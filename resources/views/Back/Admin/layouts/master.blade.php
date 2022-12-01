@@ -45,21 +45,7 @@
                <li><a href="" class="iq-waves-effect"><i class="ri-message-line"></i><span>Setting</span></a></li>
               
             
-               <li>
-                  <a href="#extra-pages" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-pantone-line"></i><span>Extra Pages</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
-                  <ul id="extra-pages" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                     <li><a href="pages-timeline.html"><i class="ri-map-pin-time-line"></i>Timeline</a></li>
-                     <li><a href="pages-invoice.html"><i class="ri-question-answer-line"></i>Invoice</a></li>
-                     <li><a href="blank-page.html"><i class="ri-invision-line"></i>Blank Page</a></li>
-                     <li><a href="pages-error.html"><i class="ri-error-warning-line"></i>Error 404</a></li>
-                     <li><a href="pages-error-500.html"><i class="ri-error-warning-line"></i>Error 500</a></li>
-                     <li><a href="pages-pricing.html"><i class="ri-price-tag-line"></i>Pricing</a></li>
-                     <li><a href="pages-pricing-one.html"><i class="ri-price-tag-2-line"></i>Pricing 1</a></li>
-                     <li><a href="pages-maintenance.html"><i class="ri-archive-line"></i>Maintenance</a></li>
-                     <li><a href="pages-comingsoon.html"><i class="ri-mastercard-line"></i>Coming Soon</a></li>
-                     <li><a href="pages-faq.html"><i class="ri-compasses-line"></i>Faq</a></li>
-                  </ul>
-               </li>
+             
                <li>
                   <a href="#menu-level" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-record-circle-line"></i><span>Menu Level</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                   <ul id="menu-level" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
@@ -359,7 +345,10 @@
                               </div>
                            </a>
                            <div class="d-inline-block w-100 text-center p-3">
-                              <a class="bg-primary iq-sign-btn" href="sign-in.html" role="button">Sign out<i class="ri-login-box-line ml-2"></i></a>
+                              <form action=" {{route('logout')}} " method="POST">
+                                 @csrf
+                                 <button type="submit" class="iq-sub-card iq-bg-primary-hover">log out</button>
+                              </form>
                            </div>
                         </div>
                      </div>

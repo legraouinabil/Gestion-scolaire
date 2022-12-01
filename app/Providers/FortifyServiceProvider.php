@@ -61,12 +61,13 @@ class FortifyServiceProvider extends ServiceProvider
         });
 
         Fortify::loginView(function(){
-
+           
             return view('Auth.login');
         });
-        Fortify::registerView(function(){
-
-            return view('Auth.Register');
+        Fortify::registerView(function(Request $request ){
+           
+          
+            return view('Front.notFound');
         });
         Fortify::verifyEmailView(function(){
 

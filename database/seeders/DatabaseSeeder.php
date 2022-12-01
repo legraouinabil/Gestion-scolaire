@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -23,6 +24,9 @@ class DatabaseSeeder extends Seeder
             ModulsSeeder::class,
             StagaireSeeder::class,
             BlogSeeder::class,
+           GroupSeeder::class,
+            CourseSeeder::class,
+
         ]);
     }
 }

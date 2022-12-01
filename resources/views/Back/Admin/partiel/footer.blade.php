@@ -43,12 +43,12 @@
       <script src="{{asset('back/js/smooth-scrollbar.js')}}"></script>
       <!-- lottie JavaScript -->
       <script src="{{asset('back/js/lottie.js')}}"></script>
-      <!-- Chart Custom JavaScript -->
-      <script src="{{asset('back/js/chart-custom.js')}}"></script>
-      <!-- Custom JavaScript -->
-      <script src="{{asset('back/js/custom.js')}}"></script>
 
+
+   
+   
     <script src="{{ asset('js/app.js') }}"></script>
+    @yield('scripts')
 
 </body>
 </html>

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 
 class FormateurFactory extends Factory
 {
@@ -17,10 +18,10 @@ class FormateurFactory extends Factory
         return [
             'first_name'  => $name,
             'last_name'  =>$this->faker->realText($maxNbchars = 10 , $indexSize =3),
-            'image'  => $this->faker->imageUrl(640, 480, 'animals', true),
+            
             'phone'  => $this->faker->phoneNumber(),
             'email'  => $this->faker->email(),
-            'password'  =>'123456',
+            'password'  =>Hash::make('000000'),
             'filier_id'  =>$this->faker->numberBetween(1,10)
         ];
     }

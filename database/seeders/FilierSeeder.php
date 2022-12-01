@@ -15,7 +15,7 @@ class FilierSeeder extends Seeder
     public function run()
     {
         Filier::factory()
-       ->count(10)
+       ->count(20)
        ->create();
     }
 }
