@@ -35,7 +35,7 @@ class FilierController extends Controller
     }
 
     public function store(Request $request){
-        $request->validate([
+       $validator =  Validator::make($request->all(),[
             'name' => 'required',
             'description' => 'required',
             'small_description' => 'required',
@@ -43,7 +43,9 @@ class FilierController extends Controller
             'formation_id' => 'bail|required|exists:formations,id',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-    
+        if($validator->fails()) {
+            return response()->json(['status'=>'error' , 'errors'=>$validator->errors()]);
+        }
         $input = $request->all();
         $imageName = NULL;
         if ($image = $request->file('image')) {

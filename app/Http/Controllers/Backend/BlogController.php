@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Blog;
-use Illuminate\Contracts\Validation\Validator;
+
+use Illuminate\Support\Facades\Validator;
 
 class BlogController extends Controller
 {
@@ -28,12 +29,14 @@ class BlogController extends Controller
    }
 
    public function store(Request $request){
-    $request->validate([
+    $validator = Validator::make($request->all(),[
         'title' => 'required',
         'description' => 'required',
         'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
     ]);
-
+    if($validator->fails()) {
+        return response()->json(['status'=>'error' , 'errors'=>$validator->errors()]);
+    }
     $input = $request->all();
     $imageName = NULL;
     if ($image = $request->file('image')) {
@@ -59,12 +62,12 @@ class BlogController extends Controller
     $request->validate([
         'title' => 'required',
         'description' => 'required',
-        'image' => 'nullable'
+       
     ]);
 
     $input = $request->all();
     $imageName = NULL;
-    if ($image = $request->file('image')) {
+    if ($image = $request->file('file')) {
         $destinationPath = 'img/blog/';
         $imageName = date('YmdHis') . "." . $image->getClientOriginalExtension();
         $image->move($destinationPath, $imageName);

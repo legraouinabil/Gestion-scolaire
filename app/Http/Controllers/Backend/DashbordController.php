@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
 use App\Models\Filier;
 use App\Models\Formateur;
 use App\Models\Stagaire;
@@ -14,6 +15,7 @@ class DashbordController extends Controller
 {
     public function index(){
         $data['stagaire_count'] = Stagaire::count();
+        $data['blog_count'] = Blog::count();
         $data['formateur_count'] = Formateur::count(); 
         $data['filier_count'] = Filier::count(); 
         $data['stagaire_count'] = Stagaire::count();

@@ -20,22 +20,55 @@
            
                 <div class="row">
                     @forelse ($devoires as $d)
-                    <div class="col-md-3 mt-5">
-                       <div class="bg-primary rounded-3 text-white">
-                        <img src=" {{asset('/img/devoire/'.$d->image)}} " class="card-img-top rounded-3" alt="" height="150" width="100">
-                        <div class="card-body">
-                            <h4 class="card-title">
-                                <a href=" {{route('back.stagaire.devoireShow', $d->id)}} "  class="text-white">
-                                {{$d->title}}
-                            </a></h4>
+                    <div class="col-md-12 mt-2">
+                      
+                       <div class="card">
+                       
+                        <div class="card-body d-flex ">
+                          <div >
+                              <h1  > 
+                                <i class="fa fa-book" aria-hidden="true"></i>
+                              </h1>
+                          </div>
+                          <div class="mx-5">
+                            <h4 class="card-title">{{$d->title}}</h4>
                             <p class="card-text">{{$d->description}}</p>
-                            <small class="card-text">{{$d->created_at}}</small>
+                            <p class="card-text">{{$d->last_time}}</p>
+                          </div>
+                         
+                        </div>
+                        <div class="card-footer ">
+                         <div class="d-flex justify-content-between">
+                              <span class="badge  badge-primary">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                              
+                                date de creation: {{$d->created_at}}
+                            
+                              </span>
+                              <span class="badge  badge-primary">
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                                date de creation: {{$d->last_time}}
+                              </span>
+                              <span class="badge  badge-success">
+                                <i class="fa fa-share" aria-hidden="true"></i>
+                              envoyer devoire
+                              </span>
+                         </div>
                         </div>
                        </div>
+                       
                         
                     </div>
+
+                    
                     @empty
-                        
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            <span class="sr-only">Close</span>
+                          </button>
+                          <strong>Holy guacamole!</strong> not devoire existe right now.
+                        </div>
                     @endforelse
                    
                   

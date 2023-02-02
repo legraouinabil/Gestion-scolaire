@@ -21,6 +21,6 @@
     <link rel="stylesheet" href="{{asset('front/css/flaticon.css')}}">
     <link rel="stylesheet" href="{{asset('front/css/icomoon.css')}}">
     <link rel="stylesheet" href="{{asset('front/css/style.css')}}">
-
+       @yield('styles')
   </head>
   <body>

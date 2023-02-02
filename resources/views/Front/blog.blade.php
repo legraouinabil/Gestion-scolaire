@@ -31,7 +31,7 @@
                     </div>
                   </a>
                   <div class="text bg-white p-4">
-                    <h3 class="heading"><a href="#">{{$blog->name}}</a></h3>
+                    <h3 class="heading"><a href="#">{{$blog->title}}</a></h3>
                     <p>{{$blog->description}}</p>
                     <div class="d-flex align-items-center mt-4">
                         <p class="mb-0"><a href=" {{route('front.blogDetail' , $blog->id)}} " class="btn btn-primary">Read More <span class="ion-ios-arrow-round-forward"></span></a></p>

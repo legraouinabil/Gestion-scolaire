@@ -7,6 +7,7 @@ use App\Models\Filier;
 use App\Models\Formation;
 use App\Models\Stagaire;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class StagaireController extends Controller
 {
@@ -44,7 +45,7 @@ class StagaireController extends Controller
     }
 
     public function store(Request $request){
-        $request->validate([
+         $validator = Validator::make($request->all(),[
             'first_name' => 'required',
             'last_name' => 'required',
             'phone' => 'required',
@@ -55,6 +56,9 @@ class StagaireController extends Controller
         
            
         ]);
+        if($validator->fails()) {
+            return response()->json(['status'=>'error' , 'errors'=>$validator->errors()]);
+        }
     
         $input = $request->all();
         $imageName = NULL;
@@ -66,7 +70,10 @@ class StagaireController extends Controller
         }
     
         Stagaire::create($input);
-    
+        if ($validator->fails())
+        {
+            return response()->json(['errors'=>$validator->errors()->all()]);
+        }
         return response()->json(['success'=> 'stagaire created successfully']);
     
        }

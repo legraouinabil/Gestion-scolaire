@@ -6489,7 +6489,7 @@ var render = function render() {
         alt: "profile"
       }
     })]), _vm._v(" "), _c("td", [_vm._v(_vm._s(blog.title))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(blog.description))]), _vm._v(" "), _c("td", [_c("div", {
-      staticClass: "flex align-items-center list-user-action"
+      staticClass: "d-flex justify-content-center list-user-action"
     }, [_c("a", {
       staticClass: "iq-bg-primary",
       attrs: {
@@ -6826,7 +6826,7 @@ var render = function render() {
         alt: "profile"
       }
     })]), _vm._v(" "), _c("td", [_vm._v(_vm._s(filier.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(filier.small_description))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(filier.formation.name))]), _vm._v(" "), _c("td", [_c("div", {
-      staticClass: "flex align-items-center list-user-action"
+      staticClass: "d-flex justify-content-center list-user-action"
     }, [_c("a", {
       staticClass: "iq-bg-primary",
       attrs: {
@@ -7278,7 +7278,7 @@ var render = function render() {
       src: "images/user/11.png",
       alt: "profile-pic"
     }
-  }), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _vm._m(0), _vm._v(" "), _c("div", {
     staticClass: "p-image"
   }, [_c("a", {
     staticClass: "upload-button btn iq-bg-primary"
@@ -7291,7 +7291,7 @@ var render = function render() {
     on: {
       change: _vm.onChange
     }
-  })])]), _vm._v(" "), _vm._m(0)]), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2), _vm._v(" "), _vm._m(3), _vm._v(" "), _vm._m(4), _vm._v(" "), _vm._m(5)])])])]), _vm._v(" "), _c("div", {
+  })])]), _vm._v(" "), _vm._m(1)]), _vm._v(" "), _vm._m(2), _vm._v(" "), _vm._m(3), _vm._v(" "), _vm._m(4), _vm._v(" "), _vm._m(5), _vm._v(" "), _vm._m(6)])])])]), _vm._v(" "), _c("div", {
     staticClass: "col-lg-9"
   }, [_c("div", {
     staticClass: "iq-card"
@@ -7456,7 +7456,7 @@ var render = function render() {
         _vm.$set(_vm.formateur, "phone", $event.target.value);
       }
     }
-  })]), _vm._v(" "), _vm._m(6), _vm._v(" "), _c("div", {
+  })]), _vm._v(" "), _vm._m(7), _vm._v(" "), _c("div", {
     staticClass: "form-group col-md-12"
   }, [_c("label", {
     attrs: {
@@ -7514,7 +7514,7 @@ var render = function render() {
         _vm.$set(_vm.formateur, "password", $event.target.value);
       }
     }
-  })]), _vm._v(" "), _vm._m(7)]), _vm._v(" "), _vm._m(8), _vm._v(" "), _vm.edit ? _c("button", {
+  })]), _vm._v(" "), _vm._m(8)]), _vm._v(" "), _vm._m(9), _vm._v(" "), _vm.edit ? _c("button", {
     staticClass: "btn btn-primary",
     attrs: {
       type: "button"
@@ -7545,7 +7545,7 @@ var render = function render() {
     }
   }, [_c("div", {
     staticClass: "iq-card-header d-flex justify-content-between"
-  }, [_vm._m(9), _vm._v(" "), _c("div", {
+  }, [_vm._m(10), _vm._v(" "), _c("div", {
     staticClass: "d-flex justify-content-end"
   }, [_c("button", {
     staticClass: "btn btn-primary btn-lg d-flex-content-end",
@@ -7565,14 +7565,14 @@ var render = function render() {
     staticClass: "iq-card-body"
   }, [_c("div", {
     staticClass: "table-responsive"
-  }, [_vm._m(10), _vm._v(" "), _c("table", {
+  }, [_vm._m(11), _vm._v(" "), _c("table", {
     staticClass: "table table-striped table-bordered mt-4",
     attrs: {
       id: "user-list-table",
       role: "grid",
       "aria-describedby": "user-list-page-info"
     }
-  }, [_vm._m(11), _vm._v(" "), _c("tbody", _vm._l(_vm.formateurs, function (formateur) {
+  }, [_vm._m(12), _vm._v(" "), _c("tbody", _vm._l(_vm.formateurs, function (formateur) {
     return _c("tr", {
       key: formateur.id
     }, [_c("td", {
@@ -7583,8 +7583,8 @@ var render = function render() {
         src: "/img/formateur/" + formateur.image,
         alt: "profile"
       }
-    })]), _vm._v(" "), _c("td", [_vm._v(_vm._s(formateur.first_name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(formateur.last_name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(formateur.phone))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(formateur.email))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(formateur.password))]), _vm._v(" "), _c("td", [_c("div", {
-      staticClass: "flex align-items-center list-user-action"
+    })]), _vm._v(" "), _c("td", [_vm._v(_vm._s(formateur.first_name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(formateur.last_name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(formateur.phone))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(formateur.email))]), _vm._v(" "), _c("td", [_c("div", {
+      staticClass: "d-flex justify-content-center list-user-action"
     }, [_c("a", {
       staticClass: "iq-bg-primary",
       attrs: {
@@ -7616,10 +7616,23 @@ var render = function render() {
     }, [_c("i", {
       staticClass: "ri-delete-bin-line"
     })])])])]);
-  }), 0)])]), _vm._v(" "), _vm._m(12)])])]);
+  }), 0)])]), _vm._v(" "), _vm._m(13)])])]);
 };
 
 var staticRenderFns = [function () {
+  var _vm = this,
+      _c = _vm._self._c;
+
+  return _c("div", {
+    staticClass: "p-image"
+  }, [_c("input", {
+    staticClass: "file-upload",
+    attrs: {
+      type: "file",
+      accept: "image/*"
+    }
+  })]);
+}, function () {
   var _vm = this,
       _c = _vm._self._c;
 
@@ -7830,7 +7843,7 @@ var staticRenderFns = [function () {
   var _vm = this,
       _c = _vm._self._c;
 
-  return _c("thead", [_c("tr", [_c("th", [_vm._v("image")]), _vm._v(" "), _c("th", [_vm._v("f_Name")]), _vm._v(" "), _c("th", [_vm._v("l_Name")]), _vm._v(" "), _c("th", [_vm._v("Phone")]), _vm._v(" "), _c("th", [_vm._v("Email")]), _vm._v(" "), _c("th", [_vm._v("Password")]), _vm._v(" "), _c("th", [_vm._v("Action")])])]);
+  return _c("thead", [_c("tr", [_c("th", [_vm._v("image")]), _vm._v(" "), _c("th", [_vm._v("f_Name")]), _vm._v(" "), _c("th", [_vm._v("l_Name")]), _vm._v(" "), _c("th", [_vm._v("Phone")]), _vm._v(" "), _c("th", [_vm._v("Email")]), _vm._v(" "), _c("th", [_vm._v("Action")])])]);
 }, function () {
   var _vm = this,
       _c = _vm._self._c;
@@ -7890,7 +7903,7 @@ var render = function render() {
     }, [_c("td", {
       staticClass: "text-center"
     }, [_vm._v("\n                   " + _vm._s(formation.id) + "\n                  ")]), _vm._v(" "), _c("td", [_vm._v(_vm._s(formation.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(formation.description))]), _vm._v(" "), _c("td", [_c("div", {
-      staticClass: "flex align-items-center list-user-action"
+      staticClass: "d-flex justify-content-center list-user-action"
     }, [_c("a", {
       staticClass: "iq-bg-primary",
       attrs: {
@@ -7950,6 +7963,7 @@ var render = function render() {
   }, [_c("div", {
     staticClass: "form-group"
   }, [_c("label", {
+    "class": [_vm.errors.name ? "text-danger" : ""],
     attrs: {
       "for": ""
     }
@@ -7978,14 +7992,10 @@ var render = function render() {
         _vm.$set(_vm.formation, "name", $event.target.value);
       }
     }
-  }), _vm._v(" "), _c("small", {
-    staticClass: "text-muted",
-    attrs: {
-      id: "helpId"
-    }
-  }, [_vm._v("Help text")])]), _vm._v(" "), _c("div", {
+  })]), _vm._v(" "), _c("div", {
     staticClass: "form-group"
   }, [_c("label", {
+    "class": [_vm.errors.description ? "text-danger" : ""],
     attrs: {
       "for": ""
     }
@@ -7996,7 +8006,7 @@ var render = function render() {
       value: _vm.formation.description,
       expression: "formation.description"
     }],
-    "class": ["form-control", _vm.errors.name ? "is-invalid" : ""],
+    "class": ["form-control", _vm.errors.description ? "is-invalid" : ""],
     attrs: {
       name: "",
       id: "",
@@ -8013,12 +8023,7 @@ var render = function render() {
         _vm.$set(_vm.formation, "description", $event.target.value);
       }
     }
-  }), _vm._v(" "), _c("small", {
-    staticClass: "text-muted",
-    attrs: {
-      id: "helpId"
-    }
-  }, [_vm._v("Help text")])])]), _vm._v(" "), _c("div", {
+  })])]), _vm._v(" "), _c("div", {
     staticClass: "modal-footer"
   }, [_c("button", {
     staticClass: "btn btn-secondary",
@@ -8046,7 +8051,12 @@ var render = function render() {
     on: {
       click: _vm.addFormation
     }
-  }, [_vm._v("\n              Save\n            ")])])])])])])]);
+  }, [_c("i", {
+    staticClass: "fa fa-share",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  }), _vm._v("\n              Save\n            ")])])])])])])]);
 };
 
 var staticRenderFns = [function () {
@@ -8197,7 +8207,7 @@ var render = function render() {
     return _c("tr", {
       key: Modul.id
     }, [_c("td", [_vm._v(_vm._s(Modul.id))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(Modul.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(Modul.description))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(Modul.nbHours))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(Modul.cofession))]), _vm._v(" "), _c("td", [_vm._v("Modul")]), _vm._v(" "), _c("td", [_c("div", {
-      staticClass: "flex align-items-center list-user-action"
+      staticClass: "d-flex justify-content-center list-user-action"
     }, [_c("a", {
       staticClass: "iq-bg-primary",
       attrs: {
@@ -9008,7 +9018,7 @@ var render = function render() {
         alt: "profile"
       }
     })]), _vm._v(" "), _c("td", [_vm._v(_vm._s(stagaire.first_name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(stagaire.last_name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(stagaire.phone))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(stagaire.email))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(stagaire.password))]), _vm._v(" "), _c("td", [_c("div", {
-      staticClass: "flex align-items-center list-user-action"
+      staticClass: "d-flex justify-content-center list-user-action"
     }, [_c("a", {
       staticClass: "iq-bg-primary",
       attrs: {

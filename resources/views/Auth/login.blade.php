@@ -1,43 +1,83 @@
 @extends('Front.layouts.master')
 
+@section('styles')
+<style>
+ 
+ 
+    div .clogin{
+        background-color: rgb(241, 69, 7);
+        color: aliceblue;
+        text-decoration-style: dashed
+
+    }
+   .clogin :hover{
+  
+        position: relative;
+        top: 4px;
+        left: 4px;
+   }
+   .clogin {
+  background: rgb(241, 69, 7);
+  background: linear-gradient(0deg, rgb(241, 69, 7); 0%,  rgb(241, 69, 7); 100%);
+  border: none;
+}
+.clogin:hover {
+   background: rgb(241, 69, 7);;
+background: linear-gradient(0deg,  rgb(241, 69, 7); 0%, rgba(2,126,251,1) 100%);
+}
+
+
+
+</style>
+@endsection
 
 @section('content')
 <div class="container my-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-<div class="row justify-content-between" >
-<div class="card text-white bg-primary">
- <h1>
-    <i class="fa fa-user" aria-hidden="true"></i>
- </h1>
-  <div class="card-body">
-    <h4 class="card-title">Title</h4>
-    <p class="card-text">Text</p>
-  </div>
-</div>
 
-<div class="card text-white bg-primary">
-    <h1>
-       <i class="fa fa-user" aria-hidden="true"></i>
-    </h1>
-     <div class="card-body">
-       <h4 class="card-title">Title</h4>
-       <p class="card-text">Text</p>
-     </div>
-   </div><div class="card text-white bg-primary">
-    <h1>
-       <i class="fa fa-user" aria-hidden="true"></i>
-    </h1>
-     <div class="card-body">
-       <h4 class="card-title">Title</h4>
-       <p class="card-text">Text</p>
-     </div>
-   </div>
-</div>
-        </div>
-    </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
+
+            <div class="row justify-content-between my-5">
+                <div class="col-md-4">
+                   <div class="card  text-center  @if(URL('admin/login')== URL::current()) clogin @endif ">
+                
+                
+                    <i class="fa fa-user-circle" aria-hidden="true"></i>
+                   
+                
+                    <h3>
+                        <a href="{{URL('admin/login')}}">
+                        admin
+                    </a>
+                    </h3>
+                   </div>
+                </div>
+                <div class="col-md-4 ">
+                    <div class="card text-center  @if(URL('formateur/login') == URL::current()) clogin @endif">
+                     <i class="fa fa-user-circle" aria-hidden="true"></i>
+                     <h3> <a href=" {{URL('formateur/login')}} ">
+                         formateur
+                         </a>
+                     </h3>
+                    </div>
+                 </div>
+
+                 <div class="col-md-4">
+                    <div class="card text-center  @if(URL('stagaire/login') == URL::current()) clogin @endif">
+                     <i class="fa fa-user-circle" aria-hidden="true"></i>
+                     <h3> <a href=" {{URL('stagaire/login')}} ">
+                         stagaire
+                         </a>
+                     </h3>
+                    </div>
+                 </div>
+            </div>
+
+        </div>
+    </div>    
+  
+    <div class="row justify-content-center">
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
 

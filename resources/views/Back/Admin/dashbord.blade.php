@@ -12,7 +12,7 @@
   <div class="col-md-6 col-lg-3">
     <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
        <div class="iq-card-body">
-          <div class="text-center"><span>AVG Stagaire</span></div>
+          <div class="text-center"><span>Nombre Stagaire</span></div>
           <div class="d-flex justify-content-between align-items-center">
              <div class="value-box">
                 <h2 class="mb-0"><span class="counter"><b>{{$stagaire_count}}</b></span></h2>
@@ -32,7 +32,7 @@
  <div class="col-md-6 col-lg-3">
     <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
        <div class="iq-card-body">
-          <div class="text-center"><span>AVG Engagements Rate</span></div>
+          <div class="text-center"><span>Nombre Formateur</span></div>
           <div class="d-flex justify-content-between align-items-center">
              <div class="value-box">
                 <h2 class="mb-0"><span class="counter"><b>{{$formateur_count}}</b></span></h2>
@@ -51,7 +51,7 @@
  <div class="col-md-6 col-lg-3">
     <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
        <div class="iq-card-body">
-          <div class="text-center"><span>AVG Reach</span></div>
+          <div class="text-center"><span>Nombre Filier</span></div>
           <div class="d-flex justify-content-between align-items-center">
              <div class="value-box">
                 <h2 class="mb-0"><span class="counter"><b>{{$filier_count}}</b></span></h2>
@@ -70,10 +70,10 @@
  <div class="col-md-6 col-lg-3">
     <div class="iq-card iq-card-block iq-card-stretch iq-card-height">
        <div class="iq-card-body">
-          <div class="text-center"><span>AVG Transport</span></div>
+          <div class="text-center"><span>Nombre Blog</span></div>
           <div class="d-flex justify-content-between align-items-center">
              <div class="value-box">
-                <h2 class="mb-0"><span class="counter"><b>{{$stagaire_count}}</b></span></h2>
+                <h2 class="mb-0"><span class="counter"><b>{{$blog_count}}</b></span></h2>
                 <p class="mb-0 pl-2 text-secondary line-height"> 25.5% </p>
              </div>
              <div class="iq-iconbox iq-bg-primary">

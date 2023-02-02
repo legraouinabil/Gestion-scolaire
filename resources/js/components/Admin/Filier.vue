@@ -78,7 +78,7 @@
                     <td>{{ filier.formation.name }}</td>
 
                     <td>
-                      <div class="flex align-items-center list-user-action">
+                      <div class="d-flex justify-content-center list-user-action">
                         <a
                           class="iq-bg-primary"
                           data-toggle="modal"

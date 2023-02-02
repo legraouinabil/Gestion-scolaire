@@ -7,6 +7,7 @@ use App\Models\Filier;
 use App\Models\Formateur;
 use App\Models\Formation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class FormateurController extends Controller
 {
@@ -44,7 +45,7 @@ class FormateurController extends Controller
     }
 
     public function store(Request $request){
-        $request->validate([
+        $validator =  Validator::make($request->all(),[
             'first_name' => 'required',
             'last_name' => 'required',
             'phone' => 'required',
@@ -55,7 +56,9 @@ class FormateurController extends Controller
         
            
         ]);
-    
+        if($validator->fails()) {
+            return response()->json(['status'=>'error' , 'errors'=>$validator->errors()]);
+        }
         $input = $request->all();
         $imageName = NULL;
         if ($image = $request->file('image')) {

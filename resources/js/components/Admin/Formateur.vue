@@ -20,6 +20,10 @@
                   
                   />
                    <img  v-else class="profile-pic img-fluid" src="images/user/11.png" alt="profile-pic">
+                     <div class="p-image">
+                                  
+                                   <input class="file-upload" type="file" accept="image/*">
+                                </div>
                   <div class="p-image">
                     <a
                     
@@ -289,7 +293,7 @@
                 <th>Phone</th>
 
                 <th>Email</th>
-                <th>Password</th>
+               
                 <th>Action</th>
               </tr>
             </thead>
@@ -307,10 +311,10 @@
 
                 <td>{{ formateur.phone }}</td>
                 <td>{{ formateur.email }}</td>
-                <td>{{ formateur.password }}</td>
+               
 
                 <td>
-                  <div class="flex align-items-center list-user-action">
+                  <div class="d-flex justify-content-center list-user-action">
                     <a
                       class="iq-bg-primary"
                       data-toggle="modal"

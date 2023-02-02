@@ -1,10 +1,8 @@
-@include('Back.Admin.partiel.header')
+@include('Back.Formateur.partiel.header')
 
-@if(Auth::guard('formateur'))
+
     <!-- Sidebar  -->
-    <div class="iq-sidebar"
-      
-    >
+    <div class="iq-sidebar" >
       <div class="iq-sidebar-logo d-flex justify-content-between">
          <a href="index.html">
          <img src="images/logo.gif" class="img-fluid" alt="">
@@ -37,12 +35,12 @@
                
                </li>
                <li class="@if(Route::currentRouteName() ==  'admin.blog') active @endif "><a href="{{route('admin.blog')}}" class="iq-waves-effect"><i class="ri-message-line"></i><span>Blog</span></a></li>
-               <li class="@if(Route::currentRouteName() ==  'admin.module') active @endif "><a href="{{route('admin.module')}}" class="iq-waves-effect"><i class="ri-message-line"></i><span>Model</span></a></li>
+               <li class="@if(Route::currentRouteName() ==  'admin.module') active @endif "><a href="{{route('admin.module')}}" class="iq-waves-effect"><i class="ri-git-repository-line"></i><span>Model</span></a></li>
                <li>
-                  <a href="" class="iq-waves-effect " ><i class="ri-shopping-cart-line"></i><span>Group</span></a>
+                  <a href="" class="iq-waves-effect " ><i class="ri-group-2-fill"></i></i><span>Group</span></a>
                
                </li>
-               <li><a href="" class="iq-waves-effect"><i class="ri-message-line"></i><span>Setting</span></a></li>
+               <li><a href="" class="iq-waves-effect"><i class="ri-settings-2-line"></i><span>Setting</span></a></li>
               
             
              
@@ -71,14 +69,7 @@
          <div class="p-3"></div>
       </div>
    </div>
-   @else
-   <div class="iq-sidebar">
-<li>
 
-   <a href="">aaaaaaaaaa</a>
-</li>
-   </div>
-   @endif
    <!-- TOP Nav Bar -->
    <div class="iq-top-navbar">
       <div class="iq-navbar-custom">
@@ -359,9 +350,10 @@
          
 
       </div>
-   </div>
+   </div> 
    <!-- TOP Nav Bar END -->
    <!-- Page Content  -->
+  
        <div id="content-page" class="content-page">
           <div class="container-fluid" id="app">
            
@@ -377,4 +369,4 @@
     </div>
     <!-- Wrapper END -->
 
-@include('Back.Admin.partiel.footer')
+@include('Back.Formateur.partiel.footer')

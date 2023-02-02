@@ -73,7 +73,7 @@
                     <td>{{ formation.description }}</td>
 
                     <td>
-                      <div class="flex align-items-center list-user-action">
+                      <div class="d-flex justify-content-center list-user-action">
                         <a
                           class="iq-bg-primary"
                           data-toggle="modal"
@@ -136,7 +136,7 @@
             </div>
             <div class="modal-body">
               <div class="form-group">
-                <label for="">formation name</label>
+                <label for="" :class="[errors.name ? 'text-danger' : '']">formation name</label>
                 <input
                   type="text"
                   name=""
@@ -146,23 +146,23 @@
                   aria-describedby="helpId"
                   v-model="formation.name"
                 />
-                <small id="helpId" class="text-muted">Help text</small>
+               
               </div>
               <div class="form-group">
-                <label for="">formation description</label>
+                <label for="" :class="[errors.description ? 'text-danger' : '']">formation description</label>
                 <textarea
                   name=""
                   id=""
                   cols="30"
                   rows="10"
-                  :class="['form-control', errors.name ? 'is-invalid' : '']"
+                  :class="['form-control', errors.description ? 'is-invalid' : '']"
                   v-model="formation.description"
                 >
                 </textarea>
-                <small id="helpId" class="text-muted">Help text</small>
+              
               </div>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer ">
               <button
                 type="button"
                 class="btn btn-secondary"
@@ -186,6 +186,7 @@
                 class="btn btn-primary"
                 @click="addFormation"
               >
+             <i class="fa fa-share" aria-hidden="true"></i>
                 Save
               </button>
             </div>
