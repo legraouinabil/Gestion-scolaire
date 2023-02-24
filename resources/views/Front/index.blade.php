@@ -5,41 +5,13 @@
 
 
 
-<section class="home-slider owl-carousel">
-    <div class="slider-item" style="background-image:url({{asset('front/images/bg_1.jpg')}});">
-        <div class="overlay"></div>
-      <div class="container">
-        <div class="row no-gutters slider-text align-items-center justify-content-start" data-scrollax-parent="true">
-        <div class="col-md-6 ftco-animate">
-          <h1 class="mb-4">Education Needs Complete Solution</h1>
-          <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-          <p><a href="{{route('front.cantact')}}" class="btn btn-primary px-4 py-3 mt-3">Contact Us</a></p>
-        </div>
-      </div>
-      </div>
-    </div>
-
-    <div class="slider-item" style="background-image:url({{asset('front/images/bg_2.jpg')}});">
-        <div class="overlay"></div>
-      <div class="container">
-        <div class="row no-gutters slider-text align-items-center justify-content-start" data-scrollax-parent="true">
-        <div class="col-md-6 ftco-animate">
-          <h1 class="mb-4">University, College School Education</h1>
-          <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-          <p><a href="#" class="btn btn-primary px-4 py-3 mt-3">Contact Us</a></p>
-        </div>
-      </div>
-      </div>
-    </div>
-  </section>
-
   <section class="ftco-services ftco-no-pb">
           <div class="container-wrap">
               <div class="row no-gutters">
 
 
                 @foreach ($formations as $formation)
-                <div class="col-md-3 d-flex services align-self-stretch py-5 px-4 ftco-animate bg-primary">
+                <div class="col-md-3 d-flex services align-self-stretch py-5 px-4 ftco-animate   @if( $formation->id %2 != 0) bg-darken  @else   bg-primary @endif ">
                   <div class="media block-6 d-block text-center">
                     <div class="icon d-flex justify-content-center align-items-center">
                           <span class="flaticon-teacher"></span>
@@ -203,7 +175,7 @@
               <div class="row">
              @foreach ($filiers as $filier)
              <div class="col-md-3 course ftco-animate">
-              <div class="img" style="background-image: url({{$filier->image}});"></div>
+              <div class="img" style="background-image: url({{ asset('/img/filier/'.$filier->image) }});"></div>
               <div class="text pt-4">
                   <p class="meta d-flex">
                       <span><i class="icon-user mr-2"></i>Mr. Khan</span>
@@ -236,7 +208,7 @@
                 <div class="col-md-6 col-lg-3 ftco-animate">
                   <div class="staff">
                       <div class="img-wrap d-flex align-items-stretch">
-                          <div class="img align-self-stretch" style="background-image: url({{$formateur->image}});"></div>
+                          <div class="img align-self-stretch" style="background-image: url( {{ asset('/img/formateur/'.$formateur->image) }});"></div>
                       </div>
                       <div class="text pt-3 text-center">
                           <h3>{{$formateur->first_name}}</h3>
@@ -329,7 +301,7 @@
                 @foreach ($blogs as $blog)
                 <div class="col-md-6 col-lg-4 ftco-animate">
                   <div class="blog-entry">
-                    <a href="blog-single.html" class="block-20 d-flex align-items-end" style="background-image: url({{$blog->image}});">
+                    <a href="blog-single.html" class="block-20 d-flex align-items-end" style="background-image: url({{ asset('/img/blog/'.$blog->image) }});">
                                       <div class="meta-date text-center p-2">
                         <span class="day">26</span>
                         <span class="mos">June</span>

@@ -9,6 +9,8 @@ use App\Http\Controllers\Backend\Formateur\CourseController;
 use App\Http\Controllers\Backend\FormateurController;
 use App\Http\Controllers\Backend\StagaireController;
 use App\Http\Controllers\Backend\ModuleController;
+use App\Http\Controllers\Backend\ProfileController;
+use App\Http\Controllers\Backend\SettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,3 +81,14 @@ Route::get('/formateur/course/create', [CourseController::class, 'create'])->nam
 Route::post('/formateur/course/store', [CourseController::class, 'store'])->name('formateur.course.store');
 Route::delete('/formateur/course/delete/{id}', [CourseController::class, 'destroy'])->name('formateur.course.delete');
 Route::put('/formateur/course/update/{id}', [CourseController::class, 'update'])->name('formateur.course.update');
+
+
+//edit profile route
+Route::get('/admin/profile/{id}', [ProfileController::class, 'edit'])->name('admin.profile.edit');
+Route::post('/admin/profile/update/{id}', [ProfileController::class, 'update'])->name('admin.profile.update');
+Route::post('/admin/profile/changepassword/{id}', [ProfileController::class, 'changepassword'])->name('admin.profile.changepassword');
+
+
+//setting of weeb sssite
+Route::get('/admin/setting', [SettingController::class, 'index'])->name('admin.setting');
+Route::post('/admin/setting/{id}', [SettingController::class, 'update'])->name('admin.setting.update');

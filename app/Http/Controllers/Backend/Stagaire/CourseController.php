@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class CourseController extends Controller
 {
     public function index(){
-     $data['courses'] = Course::select('title' , 'description', 'file' )->take(10)->get();
+     $data['courses'] = Course::select('title' , 'description', 'file' )->orderBy('id' , 'desc')->take(10)->get();
      return view('Back.Stagaire.course')->with($data);
     }
 }

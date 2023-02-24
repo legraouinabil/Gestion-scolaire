@@ -62,13 +62,12 @@
 
                     
                     @empty
-                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            <span class="sr-only">Close</span>
-                          </button>
-                          <strong>Holy guacamole!</strong> not devoire existe right now.
+                       <div class="col-md-12">
+                        <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+                          
+                          <strong >not devoire existe right now.</strong>
                         </div>
+                       </div>
                     @endforelse
                    
                   

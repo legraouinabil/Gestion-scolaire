@@ -332,7 +332,7 @@ export default {
 
                         Toast.fire({
                             icon: "success",
-                            title: " blog updated successfully",
+                            title: " blog created successfully",
                         });
                         this.getblog();
                         this.closeModal();
@@ -356,8 +356,6 @@ export default {
                 })
                 .catch((err) => console.log(err));
         },
-
-      
 
         deleteblog(id) {
             Swal.fire({

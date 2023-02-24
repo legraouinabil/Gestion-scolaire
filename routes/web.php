@@ -12,6 +12,8 @@ use App\Http\Controllers\Backend\Formateur\DashbordController as FormateurDashbo
 use App\Http\Controllers\Backend\StagaireController;
 use App\Http\Controllers\Backend\FormateurController;
 use App\Http\Controllers\Backend\ModuleController;
+use App\Http\Controllers\Backend\ProfileController;
+use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\Stagaire\CourseController as StagaireCourseController;
 use App\Http\Controllers\Backend\Stagaire\DashbordController as StagaireDashbordController;
 use App\Http\Controllers\Backend\Stagaire\DevoirController as StagaireDevoirController;
@@ -35,6 +37,7 @@ Route::get('/formation/{id}/filier/{f_id}' , [SiteController ::class , 'showFili
 Route::get('/blog/{id}' , [SiteController ::class , 'blogdetail'])->name('front.blogDetail');
 Route::get('/blog' , [SiteController ::class , 'blog'])->name('front.blog');
 Route::get('/cantact' , [SiteController ::class , 'cantact'])->name('front.cantact');
+Route::post('/contact', [SiteController::class , 'send'])->name('front.cantact.send');
 Route::get('/notfound' ,function(){
     return view('Front.notFound');
 });
@@ -43,13 +46,14 @@ Route::get('/notfound' ,function(){
 Route::prefix('admin')->middleware('auth:admin')->group(function(){
     Route::get('/index' , [DashbordController ::class , 'index'])->name('back.home');
     Route::get('/chartStagaire' , [DashbordController ::class , 'chartStagaire'])->name('back.chartStagaire');
-
+    Route::get('/profile', [ProfileController::class, 'view'])->name('admin.profile');
     Route::get('/formation', [FormationController::class, 'view'])->name('admin.formation');
     Route::get('/filier', [FilierController::class, 'view'])->name('admin.filier');
     Route::get('/blog', [BlogController::class, 'view'])->name('admin.blog');
     Route::get('/stagaire', [StagaireController::class, 'view'])->name('admin.stagaire');
     Route::get('/formateur', [FormateurController::class, 'view'])->name('admin.formateur');
     Route::get('/module', [ModuleController::class, 'view'])->name('admin.module');
+    Route::get('/setting', [SettingController::class, 'view'])->name('admin.setting');
     
 });
 
@@ -61,7 +65,10 @@ Route::get('/devoire', [DevoirController::class, 'index'])->name('back.formateur
 Route::get('/devoire/{id}', [DevoirController::class, 'show'])->name('back.formateur.devoireDetail');
 Route::post('/devoire/store', [DevoirController::class, 'store'])->name('back.formateur.addDevoire');
 
+Route::get('/course/show/{id}', [CourseController::class, 'show'])->name('formateur.course.show');
 Route::get('/course/create', [CourseController::class, 'create'])->name('formateur.course.create');
+Route::post('/course/store', [CourseController::class, 'store'])->name('formateur.course.store');
+Route::delete('/course/delete/{id}', [CourseController::class, 'destroy'])->name('formateur.course.delete');
 Route::delete('/devoire/{id}', [DevoirController::class, 'delete'])->name('back.formateur.deleteDevoire');
 });
 

@@ -323,7 +323,7 @@ export default {
       formData.append("dureé", this.filier.dureé);
       formData.append("formation_id", this.filier.formation_id);
       formData.append("image", this.filier.img);
-
+ console.log(formData);
       axios
         .post("/api/admin/filier/store", formData, config)
         .then((response) => {

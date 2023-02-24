@@ -30,7 +30,9 @@ import module  from './components/Admin/Module.vue';
 import stagaire  from './components/Admin/Stagaire.vue';
 import formateur  from './components/Admin/Formateur.vue';
 import filier  from './components/Admin/Filier.vue';
+import profile  from './components/Admin/Profile.vue';
 import blog  from './components/Admin/Blog.vue';////
+import setting  from './components/Admin/Setting.vue';////
 /////////////////////////////////////////////////////////////
 
 import course  from './components/Formateur/Course.vue';
@@ -44,7 +46,9 @@ Vue.component('Formation',formation);
 Vue.component('Stagaire',stagaire);
 Vue.component('Formateur',formateur);
 Vue.component('Filier',filier);
+Vue.component('Profile',profile);
 Vue.component('Blog',blog);
+Vue.component('Setting' , setting);
 
 const app = new Vue({
     el: '#app',

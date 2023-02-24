@@ -26,7 +26,7 @@
                <li class="@if(Route::currentRouteName() ==  'back.formateur.home') active @endif ">
                   <a href="{{route('back.formateur.home')}}" class="iq-waves-effect "><i class="ri-home-4-line "></i><span>Dashboard</span></a>
                </li>
-               <li class="@if(Route::currentRouteName() ==  '') active @endif ">
+               <li class="@if(Route::currentRouteName() ==  'back.formateur.course') active @endif ">
                   <a href="{{route('back.formateur.course')}}" class="iq-waves-effect "><i class="ri-home-4-line "></i><span>Courses</span></a>
                </li>
                <li class="@if(Route::currentRouteName() ==  'back.formateur.devoire') active @endif ">

@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ContactFormSubmitted;
 use App\Models\Blog;
 use App\Models\Filier;
 use App\Models\Formateur;
 use App\Models\Formation;
+use App\Models\Setting;
 use App\Models\Stagaire;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\ViewException;
 
 class SiteController extends Controller
@@ -65,7 +68,7 @@ class SiteController extends Controller
     }
 
     public function blog(){
-        $data['blogs']  = Blog::select('id' , 'title'  , 'description' , 'image')->get();
+        $data['blogs']  = Blog::select('id' , 'title'  , 'description' , 'image')->orderBy('id' , 'desc')->get();
 
 
         return view('Front.blog')->with($data);
@@ -73,8 +76,27 @@ class SiteController extends Controller
 
 
     public function cantact(){
-        return view('Front.cantact');
+      $data['cantact'] =Setting::first();
+        return view('Front.cantact')->with($data);
     }
+
+    public function send(Request $request)
+{
+    // Validate the form data
+    $request->validate([
+        'name' => 'required',
+        'email' => 'required|email',
+        'message' => 'required',
+        'subject' => 'required',
+    ]);
+
+    // Send the email
+    Mail::to('abdo.papiyo@gmail.com')->send(new ContactFormSubmitted($request->all()));
+
+    // Redirect back with a success message
+    return back()->with('success', 'Thank you for contacting us!');
+}
+
 
    
 

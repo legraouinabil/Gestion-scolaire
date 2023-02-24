@@ -3,8 +3,10 @@
  <div class="bg-top navbar-light">
     <div class="container">
         <div class="row no-gutters d-flex align-items-center align-items-stretch">
-            <div class="col-md-4 d-flex align-items-center py-4">
-                <a class="navbar-brand" href="{{route('front.home')}}">Fox. <span>University</span></a>
+            <div class="col-md-4 d-flex align-items-center">
+                <a href="{{route('front.home')}}">
+                  <img src=" {{asset('/img/setting/'.  $setting->logo)}}" class="img-fluid" alt="" height="80" width="80">
+               </a>
             </div>
             <div class="col-lg-8 d-block">
                 <div class="row d-flex">
@@ -12,14 +14,14 @@
                         <div class="icon d-flex justify-content-center align-items-center"><span class="icon-paper-plane"></span></div>
                         <div class="text">
                             <span>Email</span>
-                            <span>youremail@email.com</span>
+                            <span>{{$setting->email}}</span>
                         </div>
                     </div>
                     <div class="col-md d-flex topper align-items-center align-items-stretch py-md-4">
                         <div class="icon d-flex justify-content-center align-items-center"><span class="icon-phone2"></span></div>
                         <div class="text">
                             <span>Call</span>
-                            <span>Call Us: + 1235 2355 98</span>
+                            <span>Call Us:{{$setting->phone}}</span>
                         </div>
                     </div>
                     <div class="col-md topper d-flex align-items-center justify-content-end">
@@ -59,10 +61,10 @@
     </form>
       <div class="collapse navbar-collapse" id="ftco-nav">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active"><a href="{{route('front.home')}}   " class="nav-link pl-0">Home</a></li>
+            <li class="nav-item  @if(Route::currentRouteName() ==  'front.home') active @endif "><a href="{{route('front.home')}}   " class="nav-link pl-0">Home</a></li>
           
              
-           <li class="dropdown open nav-item">
+           <li class="dropdown open nav-item  @if(Route::currentRouteName() ==  'front.filier') active @endif ">
             <a class="nav-link" dropdown-toggle" type="button" id="triggerId" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
                 Formation
@@ -71,7 +73,7 @@
               @foreach ($formations as $f)
                   
               <a class="dropdown-item" href=" {{route('front.filier' , $f->id)}} ">{{$f->name}}
-              <i class="fa fa-address-book" aria-hidden="true"></i>
+             
               </a>
              
               @endforeach
@@ -82,13 +84,17 @@
             
             </li>
           
-            <li class="nav-item"><a href=" {{route('front.blog')}}" class="nav-link">Blog</a></li>
-          <li class="nav-item"><a href="  {{route('front.cantact')}} " class="nav-link">Contact</a></li>
+            <li class="nav-item  @if(Route::currentRouteName() ==  'front.blog') active @endif ">
+              <a href=" {{route('front.blog')}}" class="nav-link">Blog</a>
+            </li>
+          <li class="nav-item @if(Route::currentRouteName() ==  'front.cantact') active @endif">
+            <a href="  {{route('front.cantact')}} " class="nav-link">Contact</a>
+          </li>
           @if (Auth::guard('stagaire')->check())
-          <li class="nav-item"><a href="   " class="nav-link">Courses</a></li>
+          <li class="nav-item @if(Route::currentRouteName() ==  '') active @endif"><a href="   " class="nav-link">Courses</a></li>
          @endif
          @if (Auth::guard('formateur')->check())
-         <li class="nav-item"><a href="   "class="nav-link">Dashbord</a></li>
+         <li class="nav-item"><a href=" {{route('back.formateur.home') }}  "class="nav-link">Dashbord</a></li>
         @endif
 
         </ul>
@@ -96,3 +102,49 @@
     </div>
   </nav>
 <!-- END nav -->
+
+
+
+
+@if(Route::currentRouteName() ==  'front.home')
+<section class="home-slider owl-carousel" >
+  <div class="slider-item" style="background-image:url({{asset('front/images/bg_1.jpg')}});">
+      <div class="overlay"></div>
+    <div class="container">
+      <div class="row no-gutters slider-text align-items-center justify-content-start" data-scrollax-parent="true">
+      <div class="col-md-6 ftco-animate">
+        <h1 class="mb-4">Education Needs Complete Solution</h1>
+        <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+        <p><a href="{{route('front.cantact')}}" class="btn btn-primary px-4 py-3 mt-3">Contact Us</a></p>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <div class="slider-item" style="background-image:url({{asset('front/images/bg_2.jpg')}});">
+      <div class="overlay"></div>
+    <div class="container">
+      <div class="row no-gutters slider-text align-items-center justify-content-start" data-scrollax-parent="true">
+      <div class="col-md-6 ftco-animate">
+        <h1 class="mb-4">University, College School Education</h1>
+        <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
+        <p><a href="#" class="btn btn-primary px-4 py-3 mt-3">Contact Us</a></p>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+@else
+<section class="hero-wrap hero-wrap-2" style="background-image: url({{asset('front/images/bg_1.jpg')}});">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text align-items-center justify-content-center">
+      <div class="col-md-9 ftco-animate text-center">
+        <h1 class="mb-2 bread">Courses</h1>
+        <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Formation <i class="ion-ios-arrow-forward"></i></span>  <span> <i class="ion-ios-arrow-forward"></i></span></p>
+      </div>
+    </div>
+  </div>
+</section>
+@endif

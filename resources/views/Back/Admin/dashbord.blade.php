@@ -88,10 +88,12 @@
 </div>
    <div class="row ">
     <div class="col-md-8">
+     
       <canvas id="myChart" class="height-500 "></canvas>
+
     </div>
     <div class="col-md-4">
-      <canvas id="stackedBar" class="height-500 "></canvas>
+    <canvas id="stackedBar" class="height-500 "></canvas>
     </div>
    </div>
 

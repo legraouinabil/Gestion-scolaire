@@ -32,6 +32,8 @@
                           id="exampleInputSearch"
                           placeholder="Search"
                           aria-controls="user-list-table"
+                          v-model="filter"
+                         @keyup ="search()"
                         />
                       </div>
                     </form>
@@ -208,6 +210,7 @@ export default {
       },
       edit: false,
       errors: [],
+      filter:""
 
     };
   },
@@ -311,7 +314,16 @@ export default {
         .catch((err) => console.log(err));
     },
 
+    search() {
+      return this.formations.filter(formation => formation.name.includes(this.filter));
+    }
+
    
   },
+   computed: {
+    searchItem() {
+      return this.search();
+    }
+  }
 };
 </script>

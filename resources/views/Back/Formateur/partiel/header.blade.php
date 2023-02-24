@@ -16,7 +16,16 @@
       <!-- Responsive CSS -->
       <link rel="stylesheet" href="{{asset('back/css/responsive.css')}}">
       <link rel="stylesheet" href="{{ asset('css/app.css') }}" />
+    
    </head>
    <body>
 
+
+
+   <!-- loader Start -->
+   <div id="loading">
+      <div id="loading-center">
+      </div>
+   </div>
+   <!-- loader END -->                 
                         

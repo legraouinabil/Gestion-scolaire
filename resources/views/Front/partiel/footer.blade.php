@@ -6,9 +6,9 @@
               <h2 class="ftco-heading-2">Have a Questions?</h2>
               <div class="block-23 mb-3">
                 <ul>
-                  <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-                  <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-                  <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
+                  <li><span class="icon icon-map-marker"></span><span class="text"> {{$setting->adresse}} </span></li>
+                  <li><a href="#"><span class="icon icon-phone"></span><span class="text"> {{$setting->phone}} </span></a></li>
+                  <li><a href="#"><span class="icon icon-envelope"></span><span class="text"> {{$setting->email}} </span></a></li>
                 </ul>
               </div>
           </div>
@@ -16,28 +16,22 @@
         <div class="col-md-6 col-lg-3">
           <div class="ftco-footer-widget mb-5">
             <h2 class="ftco-heading-2">Recent Blog</h2>
-            <div class="block-21 mb-4 d-flex">
-              <a class="blog-img mr-4" style="background-image: url(images/image_1.jpg);"></a>
-              <div class="text">
-                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
-                <div class="meta">
-                  <div><a href="#"><span class="icon-calendar"></span> June 27, 2019</a></div>
-                  <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                  <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                </div>
+           @forelse ($blogs as $b)
+           <div class="block-21 mb-4 d-flex">
+            <a class="blog-img mr-4" style="background-image: url( {{asset('/img/blog/'.$b->image)}} );"></a>
+            <div class="text">
+              <h3 class="heading"><a href="#">{{$b->title}}</a></h3>
+              <div class="meta">
+                <div><a href="#"><span class="icon-calendar"></span> June 27, 2019</a></div>
+                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
               </div>
             </div>
-            <div class="block-21 mb-5 d-flex">
-              <a class="blog-img mr-4" style="background-image: url(images/image_2.jpg);"></a>
-              <div class="text">
-                <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
-                <div class="meta">
-                  <div><a href="#"><span class="icon-calendar"></span> June 27, 2019</a></div>
-                  <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                  <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                </div>
-              </div>
-            </div>
+          </div>
+           @empty
+               
+           @endforelse
+           
           </div>
         </div>
         <div class="col-md-6 col-lg-3">
@@ -65,9 +59,9 @@
           <div class="ftco-footer-widget mb-5">
               <h2 class="ftco-heading-2 mb-0">Connect With Us</h2>
               <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-3">
-              <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-              <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-              <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+              <li class="ftco-animate"><a href="  {{$setting->twiter}}  "><span class="icon-twitter"></span></a></li>
+              <li class="ftco-animate"><a href=" {{$setting->facebook}} "><span class="icon-facebook"></span></a></li>
+              <li class="ftco-animate"><a href=" {{$setting->insta}} "><span class="icon-instagram"></span></a></li>
             </ul>
           </div>
         </div>

@@ -176,7 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\headerServiceProvider::class,
-
+        App\Providers\HeaderAdminServiceProvider::class,
     ],
 
     /*
