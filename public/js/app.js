@@ -5821,11 +5821,16 @@ __webpack_require__.r(__webpack_exports__);
       },
       edit: false,
       errors: [],
-      filter: ""
+      keywords: null
     };
   },
   created: function created() {
     this.getFormation();
+  },
+  watch: {
+    keywords: function keywords(after, before) {
+      this.fetch();
+    }
   },
   methods: {
     getFormation: function getFormation() {
@@ -5923,17 +5928,19 @@ __webpack_require__.r(__webpack_exports__);
         return console.log(err);
       });
     },
-    search: function search() {
+    fetch: function fetch() {
       var _this5 = this;
 
-      return this.formations.filter(function (formation) {
-        return formation.name.includes(_this5.filter);
+      axios.get("/api/admin/res-search", {
+        params: {
+          keywords: this.keywords
+        }
+      }).then(function (response) {
+        _this5.formations = response.data;
+        console.log(response.data);
+      })["catch"](function (error) {
+        return console.log(err);
       });
-    }
-  },
-  computed: {
-    searchItem: function searchItem() {
-      return this.search();
     }
   }
 });
@@ -8112,8 +8119,8 @@ var render = function render() {
     directives: [{
       name: "model",
       rawName: "v-model",
-      value: _vm.filter,
-      expression: "filter"
+      value: _vm.keywords,
+      expression: "keywords"
     }],
     staticClass: "form-control",
     attrs: {
@@ -8123,15 +8130,12 @@ var render = function render() {
       "aria-controls": "user-list-table"
     },
     domProps: {
-      value: _vm.filter
+      value: _vm.keywords
     },
     on: {
-      keyup: function keyup($event) {
-        return _vm.search();
-      },
       input: function input($event) {
         if ($event.target.composing) return;
-        _vm.filter = $event.target.value;
+        _vm.keywords = $event.target.value;
       }
     }
   })])])])]), _vm._v(" "), _vm._m(1)]), _vm._v(" "), _c("table", {
@@ -8146,7 +8150,7 @@ var render = function render() {
       key: formation.id
     }, [_c("td", {
       staticClass: "text-center"
-    }, [_vm._v("\n                   " + _vm._s(formation.id) + "\n                  ")]), _vm._v(" "), _c("td", [_vm._v(_vm._s(formation.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(formation.description))]), _vm._v(" "), _c("td", [_c("div", {
+    }, [_vm._v("\n                                        " + _vm._s(formation.id) + "\n                                    ")]), _vm._v(" "), _c("td", [_vm._v(_vm._s(formation.name))]), _vm._v(" "), _c("td", [_vm._v(_vm._s(formation.description))]), _vm._v(" "), _c("td", [_c("div", {
       staticClass: "d-flex justify-content-center list-user-action"
     }, [_c("a", {
       staticClass: "iq-bg-primary",
@@ -8200,7 +8204,7 @@ var render = function render() {
     staticClass: "modal-header"
   }, [_vm.edit ? _c("h5", {
     staticClass: "modal-title"
-  }, [_vm._v("Edit formation")]) : _c("h5", {
+  }, [_vm._v("\n                            Edit formation\n                        ")]) : _c("h5", {
     staticClass: "modal-title"
   }, [_vm._v("Add formation")]), _vm._v(" "), _vm._m(4)]), _vm._v(" "), _c("div", {
     staticClass: "modal-body"
@@ -8279,7 +8283,7 @@ var render = function render() {
     on: {
       click: _vm.closeModal
     }
-  }, [_vm._v("\n              Close\n            ")]), _vm._v(" "), _vm.edit ? _c("button", {
+  }, [_vm._v("\n                            Close\n                        ")]), _vm._v(" "), _vm.edit ? _c("button", {
     staticClass: "btn btn-primary",
     attrs: {
       type: "button"
@@ -8287,7 +8291,7 @@ var render = function render() {
     on: {
       click: _vm.updateFormation
     }
-  }, [_vm._v("\n              Update\n            ")]) : _c("button", {
+  }, [_vm._v("\n                            Update\n                        ")]) : _c("button", {
     staticClass: "btn btn-primary",
     attrs: {
       type: "button"
@@ -8300,7 +8304,7 @@ var render = function render() {
     attrs: {
       "aria-hidden": "true"
     }
-  }), _vm._v("\n              Save\n            ")])])])])])])]);
+  }), _vm._v("\n                            Save\n                        ")])])])])])])]);
 };
 
 var staticRenderFns = [function () {
@@ -8327,7 +8331,7 @@ var staticRenderFns = [function () {
     attrs: {
       "aria-hidden": "true"
     }
-  }), _vm._v("\n              Add New\n            ")])])]);
+  }), _vm._v("\n                            Add New\n                        ")])])]);
 }, function () {
   var _vm = this,
       _c = _vm._self._c;
@@ -8341,17 +8345,17 @@ var staticRenderFns = [function () {
     attrs: {
       href: "javascript:void();"
     }
-  }, [_vm._v("\n                    Print\n                  ")]), _vm._v(" "), _c("a", {
+  }, [_vm._v("\n                                        Print\n                                    ")]), _vm._v(" "), _c("a", {
     staticClass: "iq-bg-primary",
     attrs: {
       href: "javascript:void();"
     }
-  }, [_vm._v("\n                    Excel\n                  ")]), _vm._v(" "), _c("a", {
+  }, [_vm._v("\n                                        Excel\n                                    ")]), _vm._v(" "), _c("a", {
     staticClass: "iq-bg-primary",
     attrs: {
       href: "javascript:void();"
     }
-  }, [_vm._v(" Pdf ")])])]);
+  }, [_vm._v("\n                                        Pdf\n                                    ")])])]);
 }, function () {
   var _vm = this,
       _c = _vm._self._c;

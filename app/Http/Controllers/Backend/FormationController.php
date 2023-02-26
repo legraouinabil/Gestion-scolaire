@@ -28,7 +28,14 @@ class FormationController extends Controller
         return response()->json($data);
     }
 
-    public function store(Request $request){
+    public function search(Request $request)
+    {
+        $f=Formation::where('name',  'like', '%'.$request->keywords.'%')->get();
+        return response()->json($f);
+         
+    }
+    public function store(Request $request)
+    {
         
     $validator = Validator::make($request->all(),[
         'name'=>'string|required',

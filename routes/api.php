@@ -33,6 +33,7 @@ Route::get('/admin/formation/create', [FormationController::class, 'create'])->n
 Route::post('/admin/formation/store', [FormationController::class, 'store'])->name('admin.formation.store');
 Route::delete('/admin/formation/delete/{id}', [FormationController::class, 'destroy'])->name('admin.formation.delete');
 Route::put('/admin/formation/update/{f_id}', [FormationController::class, 'update'])->name('admin.formation.update');
+Route::get('/admin/res-search', [FormationController::class, 'search']);
 
 
 
@@ -92,3 +93,6 @@ Route::post('/admin/profile/changepassword/{id}', [ProfileController::class, 'ch
 //setting of weeb sssite
 Route::get('/admin/setting', [SettingController::class, 'index'])->name('admin.setting');
 Route::post('/admin/setting/{id}', [SettingController::class, 'update'])->name('admin.setting.update');
+
+
+
