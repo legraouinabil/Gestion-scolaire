@@ -177,6 +177,7 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\headerServiceProvider::class,
         App\Providers\HeaderAdminServiceProvider::class,
+        App\Providers\HeaderFormateurProvider::class,
     ],
 
     /*

@@ -14,12 +14,17 @@ class Formateur extends Authenticatable
     
     use HasFactory;
     protected $fillable = [
-        'id',  'first_name' , 'last_name','image','phone','email' ,'password', 'filier_id'
+        'id',  'first_name' , 'last_name','image','phone','email' ,'password', 'filier_id', 'adresse'
       ];
   
       public function filier(){
           return $this->belongsTo(Filier::class);
       }
+
+      public function groups(){
+        return $this->belongsToMany(Group::class)->withPivot('status');
+
+    }
 
     
 }

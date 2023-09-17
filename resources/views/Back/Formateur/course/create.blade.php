@@ -3,72 +3,94 @@
 
 @section('content')
 
+<div class="container">
+    @if(count($errors) >0)
+    <ul class="alert alert-danger" role="alert">
+        @foreach ($errors->all() as $error)
+            <li class="d-block">
+              
+                {{$error}}
+            <li/>
+        @endforeach
+    <ul/>
+    @endif
 
+   </div>
 <div class="row">
    
+
+
     <div class="col-lg-12">
-          <div class="iq-card">
-             <div class="iq-card-header d-flex justify-content-between">
-                <div class="iq-header-title">
-                   <h4 class="card-title">New Course Information</h4>
+     
+         <div class="iq-card">
+           
+            
+             <form action="{{route('formateur.course.store')}} " method="POST" enctype="multipart/form-data">
+                 @csrf
+                 <input type="hidden" name="formateur_id" value=" {{Auth::id()}} ">
+             <div class="card-body">
+                 <label for="inputName">title</label>
+                 <input type="text" class="form-control " name="title" id="title">
+                 <div class="invalid-feedback">
+                     Validation message
+                 </div>
+                <div class="form-group">
+                  <label for="description">description</label>
+                  <textarea name="description" id="description" cols="30" rows="10"  class="form-control ">
+  
+                  </textarea>
                 </div>
-             </div>
-             <div class="iq-card-body">
-                <div class="new-user-info">
-                   <form action=" {{ route('formateur.course.store') }}" method="POST" enctype="multipart/form-data">
-                     @csrf
-                     <input type="hidden" name="formateur_id" value="{{Auth::id()}}">
-                      <div class="row">
-                         <div class="form-group col-md-12">
-                            <label for="fname">title</label>
-                            <input type="text" class="form-control" id="fname" name="title" placeholder="First Name">
-                         </div>
-                         <div class="form-group col-md-12">
-                            <label for="lname">description:</label>
-                           <textarea  id="" cols="30" rows="5" class="form-control" name="description"></textarea>
-                         </div>
-                        
-                         <div class="form-group col-sm-12">
-                            <label>filier:</label>
-                            <select class="form-control" id="selectcountry">
-                               <option>Select Country</option>
-                               <option>Caneda</option>
-                               <option>Noida</option>
-                               <option >USA</option>
-                               <option>India</option>
-                               <option>Africa</option>
-                            </select>
-                         </div>
-
-                         <div class="form-group col-sm-12">
-                           <label>groupe:</label>
-                           <select class="form-control" id="selectcountry">
-                              <option>Select Country</option>
-                              <option>Caneda</option>
-                              <option>Noida</option>
-                              <option >USA</option>
-                              <option>India</option>
-                              <option>Africa</option>
-                           </select>
-                        </div>
-                        
-                         <div class="form-group col-sm-12">
-                           <label>image:</label>
-                           <input type="file"  class="file-control" name="image" />
-                         </div>
+                
+                 <div class="invalid-feedback">
+                     Validation message
+                 </div>
+ 
+                 
+                 <div class="form-group">
+                     <select class="custom-select" name="group_id" required>
+                         <option value="">Choose groupe</option>
+                         @foreach ($groupes as $g)
+                         <option value="  {{$g->id}} ">{{$g->name}}</option>
+                         @endforeach
                        
-
-                         <div class="form-group col-sm-12">
-                           <label>file:</label>
-                           <input type="file"  class="file-control" name="file" />
-                         </div>
-                     
-                      <button type="submit" class="btn btn-primary">Add New User</button>
-                   </form>
+                     </select>
+                     <div class="invalid-feedback">Example invalid custom select feedback</div>
+                  </div>
+ 
+                  <div class="form-group">
+                     <label for="exampleInputdatetime">Date and Time Input</label>
+                     <input type="date" class="form-control" id="exampleInputdatetime"  name="last_time">
+                  </div>
+                 
+                  <div class="form-group">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="validatedCustomFile" name="image" >
+                        <label class="custom-file-label" for="validatedCustomFile">Choose image...</label>
+                        <div class="invalid-feedback">Example invalid custom file feedback</div>
+                     </div>
                 </div>
+                
+         <div class="form-group">
+             <div class="custom-file">
+                 <input type="file" class="custom-file-input" id="validatedCustomFile" name="file" >
+                 <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                 <div class="invalid-feedback">Example invalid custom file feedback</div>
+              </div>
+         </div>
+ 
+         
+                  
+               
+                 <!-- TODO: This is for server side, there is another version for browser defaults -->
              </div>
-          </div>
+             <div class="card-footer text-muted">
+                 <button type="submit" class="btn btn-primary">Submit</button>
+                 <button type="submit" class="btn iq-bg-danger">cancle</button>
+             </div>
+         </form>
+         </div>
+     </div>
     </div>
- </div>
+
 
 @endsection

@@ -211,7 +211,7 @@
                                     @csrf
                                     <button type="submit" class="btn btn-primary btn-block">log out</button>
                                  </form>
-                                  <p class="mb-0 font-size-12">Control your privacy parameters.</p>
+                                 
                                </div>
                             </div>
                          </a>

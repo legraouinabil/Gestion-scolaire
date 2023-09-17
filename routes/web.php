@@ -13,6 +13,8 @@ use App\Http\Controllers\Backend\StagaireController;
 use App\Http\Controllers\Backend\FormateurController;
 use App\Http\Controllers\Backend\ModuleController;
 use App\Http\Controllers\Backend\ProfileController;
+use App\Http\Controllers\Backend\Formateur\FormateurProfileController;
+use App\Http\Controllers\Backend\Formateur\NoteController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\Stagaire\CourseController as StagaireCourseController;
 use App\Http\Controllers\Backend\Stagaire\DashbordController as StagaireDashbordController;
@@ -60,11 +62,16 @@ Route::prefix('admin')->middleware('auth:admin')->group(function(){
 Route::prefix('formateur')->middleware('auth:formateur')->group(function(){
 Route::get('/index' , [FormateurDashbordController ::class , 'view'])->name('back.formateur.home');
 Route::get('/course', [CourseController::class, 'index'])->name('back.formateur.course');
-Route::get('/note', [CourseController::class, 'index'])->name('back.formateur.note');
+Route::post('/note/{sid}', [NoteController::class, 'addNote'])->name('back.formateur.addNote');
+Route::get('/note', [NoteController::class, 'index'])->name('back.formateur.note');
+Route::get('/note/group/{id}', [NoteController::class, 'create'])->name('back.formateur.createnote');
 Route::get('/devoire', [DevoirController::class, 'index'])->name('back.formateur.devoire');
 Route::get('/devoire/{id}', [DevoirController::class, 'show'])->name('back.formateur.devoireDetail');
 Route::post('/devoire/store', [DevoirController::class, 'store'])->name('back.formateur.addDevoire');
-
+Route::get('/profile/{id}', [FormateurProfileController::class, 'view'])->name('formateur.profile');
+Route::put('/profile/{id}', [FormateurProfileController::class, 'update'])->name('formateur.profile.update');
+;
+Route::put('/profile/update/{id}', [FormateurProfileController::class, 'changePassword'])->name('formateur.password.update');
 Route::get('/course/show/{id}', [CourseController::class, 'show'])->name('formateur.course.show');
 Route::get('/course/create', [CourseController::class, 'create'])->name('formateur.course.create');
 Route::post('/course/store', [CourseController::class, 'store'])->name('formateur.course.store');

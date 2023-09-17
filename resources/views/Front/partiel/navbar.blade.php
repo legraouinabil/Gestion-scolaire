@@ -38,7 +38,7 @@
                     </form>
                             @else
                             <a href="/stagaire/login" class="btn py-2 px-3 btn-primary d-flex align-items-center justify-content-center">
-                              <span>Apply Now</span>
+                              <span>Espace privé</span>
                           </a>
                             @endif
                         </p>

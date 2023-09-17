@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Formateur;
 
 use App\Http\Controllers\Controller;
 use App\Models\Course;
+use App\Models\Group;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -16,7 +17,9 @@ class CourseController extends Controller
     {
         $data['formateur'] = auth::guard('formateur')->user();
         $data['courses'] = Course::where('formateur_id' , $data['formateur']->id  )->orderBy('id' , 'desc')->get();
-
+      
+       
+     
         return view('Back.Formateur.course.index')->with($data);
       
     }
@@ -24,16 +27,21 @@ class CourseController extends Controller
 
     public function create()
     {
-        return view('Back.Formateur.course.create');
+        $data['formateur'] = auth::guard('formateur')->user();
+        $data['groupes'] = Group::select('id' , 'name')
+        ->where('filier_id' ,  $data['formateur']->filier_id)
+        ->get();
+     //  dd($data['groupes']);
+        return view('Back.Formateur.course.create')->with($data);
     }
 
     public function store(Request $request)
     {
-        $validator =  Validator::make($request->all(),[
+        $request->validate([
         'title' => 'required',
         'description' => 'required',
         'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'video' => 'required|mimetypes:video/mp4,video/mpeg,video/quicktime|max:200000',
+        'file' => 'required|mimes:video/avi,video/mpeg,video/quicktime,csv,txt,xlx,xls,pdf|max:200000',
     ]);
 
     $course=$request->all();
@@ -66,7 +74,7 @@ class CourseController extends Controller
     public function destroy($id){
         $course = Course::findOrFail($id);
         $course->delete();
-        return redirect()->back();
+        return redirect()->back()->with('success', 'course deleted  successfuly!');
     }
 
 }

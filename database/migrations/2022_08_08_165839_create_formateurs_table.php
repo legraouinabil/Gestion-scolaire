@@ -18,8 +18,13 @@ class CreateFormateursTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('image')->default('avatar.jpg');
-            $table->string('phone');
             $table->string('email')->unique();
+            $table->string('phone');
+            $table->string('adresse')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('insta')->nullable();
+            $table->string('twiter')->nullable();
+           
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->unsignedBigInteger('filier_id')->nullable();

@@ -10,11 +10,16 @@ class Modul extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id',  'name' , 'description','nbHours','cofession' ,'filier_id'
-      ];
-  
-      public function filier(){
-          return $this->belongsTo(Filier::class);
-      }
+        'id',  'name', 'description', 'nbHours', 'cofession', 'filier_id'
+    ];
 
+    public function filier()
+    {
+        return $this->belongsTo(Filier::class);
+    }
+
+    public function stagaires()
+    {
+        return $this->belongsToMany(Stagaire::class)->withPivot('note1' ,'note2' ,'efm' ,'notefinal'  );
+    }
 }

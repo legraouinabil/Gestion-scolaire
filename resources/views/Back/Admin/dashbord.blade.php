@@ -123,7 +123,7 @@
         label: "nombre of stagaire on year",
         backgroundColor: [
     
-      'blue',
+      '#827af3',
       'red',
       'green',
       'yellow',

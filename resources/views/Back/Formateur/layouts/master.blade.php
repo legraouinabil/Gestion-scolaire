@@ -7,7 +7,7 @@
     >
       <div class="iq-sidebar-logo d-flex justify-content-between">
          <a href="index.html">
-         <img src="images/logo.gif" class="img-fluid" alt="">
+         <img src=" {{asset('/img/setting/'.  $setting->logo)}}" class="img-fluid" alt="">
          <span>Vito</span>
          </a>
          <div class="iq-menu-bt-sidebar">
@@ -24,16 +24,16 @@
             <ul id="iq-sidebar-toggle" class="iq-menu">
                <li class="iq-menu-title"><i class="ri-subtract-line "></i><span>Dashboard</span></li>
                <li class="@if(Route::currentRouteName() ==  'back.formateur.home') active @endif ">
-                  <a href="{{route('back.formateur.home')}}" class="iq-waves-effect "><i class="ri-home-4-line "></i><span>Dashboard</span></a>
+                  <a href="{{route('back.formateur.home')}}" class="iq-waves-effect "><i class="ri-home-4-line"></i><span>Dashboard</span></a>
                </li>
                <li class="@if(Route::currentRouteName() ==  'back.formateur.course') active @endif ">
-                  <a href="{{route('back.formateur.course')}}" class="iq-waves-effect "><i class="ri-home-4-line "></i><span>Courses</span></a>
+                  <a href="{{route('back.formateur.course')}}" class="iq-waves-effect "><i class="ri-book-open-line  "></i><span>Courses</span></a>
                </li>
                <li class="@if(Route::currentRouteName() ==  'back.formateur.devoire') active @endif ">
-                  <a href="{{route('back.formateur.devoire')}}" class="iq-waves-effect "><i class="ri-home-4-line "></i><span>Devoire</span></a>
+                  <a href="{{route('back.formateur.devoire')}}" class="iq-waves-effect "><i class="ri-calendar-line"></i><span>Devoire</span></a>
                </li>
                <li class="@if(Route::currentRouteName() ==  'back.formateur.note') active @endif ">
-                  <a href="{{route('back.formateur.note')}}" class="iq-waves-effect "><i class="ri-home-4-line "></i><span>Note</span></a>
+                  <a href="{{route('back.formateur.note')}}" class="iq-waves-effect "><i class="ri-file-line "></i><span>Note</span></a>
                </li>
               
             </ul>
@@ -69,10 +69,7 @@
             </div>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                <ul class="navbar-nav ml-auto navbar-list">
-                  <li class="nav-item">
-                     <a class="search-toggle iq-waves-effect language-title" href="#"><img src="images/small/flag-01.png" alt="img-flaf" class="img-fluid mr-1" style="height: 16px; width: 16px;" /> English <i class="ri-arrow-down-s-line"></i></a>
-                    
-                  </li>
+                 
                   
                   <li class="nav-item">
                      <a href="#" class="search-toggle iq-waves-effect">
@@ -112,9 +109,9 @@
             <ul class="navbar-list">
                 <li>
                   <a href="#" class="search-toggle iq-waves-effect d-flex align-items-center bg-primary rounded">
-                     <img src="images/user/1.jpg" class="img-fluid rounded mr-3" alt="user">
+                     <img src=" {{asset('/img/formateur/'.  $formateur->image)}}" class="img-fluid rounded mr-3" alt="user">
                      <div class="caption">
-                        <h6 class="mb-0 line-height text-white">Nik jone</h6>
+                        <h6 class="mb-0 line-height text-white">{{$formateur->last_name}}</h6>
                         <span class="font-size-12 text-white">Available</span>
                      </div>
                   </a>
@@ -122,7 +119,7 @@
                      <div class="iq-card shadow-none m-0">
                         <div class="iq-card-body p-0 ">
                            <div class="bg-primary p-3">
-                              <h5 class="mb-0 text-white line-height">Hello Nik jone</h5>
+                              <h5 class="mb-0 text-white line-height">Hello {{$formateur->last_name}}</h5>
                               <span class="text-white font-size-12">Available</span>
                            </div>
                            <a href="profile.html" class="iq-sub-card iq-bg-primary-hover">
@@ -136,7 +133,7 @@
                                  </div>
                               </div>
                            </a>
-                           <a href="profile-edit.html" class="iq-sub-card iq-bg-primary-hover">
+                           <a href="  {{route('formateur.profile' , Auth::id())}}" class="iq-sub-card iq-bg-primary-hover">
                               <div class="media align-items-center">
                                  <div class="rounded iq-card-icon iq-bg-primary">
                                     <i class="ri-profile-line"></i>
@@ -147,34 +144,21 @@
                                  </div>
                               </div>
                            </a>
-                           <a href="account-setting.html" class="iq-sub-card iq-bg-primary-hover">
-                              <div class="media align-items-center">
-                                 <div class="rounded iq-card-icon iq-bg-primary">
-                                    <i class="ri-account-box-line"></i>
-                                 </div>
-                                 <div class="media-body ml-3">
-                                    <h6 class="mb-0 ">Account settings</h6>
-                                    <p class="mb-0 font-size-12">Manage your account parameters.</p>
-                                 </div>
-                              </div>
-                           </a>
+                          
                            <a href="privacy-setting.html" class="iq-sub-card iq-bg-primary-hover">
                               <div class="media align-items-center">
                                  <div class="rounded iq-card-icon iq-bg-primary">
                                     <i class="ri-lock-line"></i>
                                  </div>
                                  <div class="media-body ml-3">
-                                    <h6 class="mb-0 ">Privacy Settings</h6>
-                                    <p class="mb-0 font-size-12">Control your privacy parameters.</p>
+                                   <form action=" {{route('logout')}} " method="POST">
+                                      @csrf
+                                      <button type="submit" class="btn btn-primary btn-block">log out</button>
+                                   </form>
+                                   
                                  </div>
                               </div>
                            </a>
-                           <div class="d-inline-block w-100 text-center p-3">
-                              <form action=" {{route('logout')}} " method="POST">
-                                 @csrf
-                                 <button type="submit" class="iq-sub-card iq-bg-primary-hover">log out</button>
-                              </form>
-                           </div>
                         </div>
                      </div>
                   </div>

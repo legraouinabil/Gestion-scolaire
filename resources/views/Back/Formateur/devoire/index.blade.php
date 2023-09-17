@@ -3,11 +3,7 @@
 
 @section('content')
 
-<nav class="breadcrumb">
-    <a class="breadcrumb-item" href="#">devoire</a>
-    <a class="breadcrumb-item" href="#">devoire</a>
-    <span class="breadcrumb-item active">devoire</span>
-</nav>
+
 <div>
     @if(count($errors) >0)
     <ul class="alert alert-danger" role="alert">
@@ -32,19 +28,15 @@
 </div>
 <div class="row">
     <div class="col-md-8">
-       <div class="card">
-        <div class="card-header bg-primary">
-            list devoir
-        </div>
+       <div class="iq-card">
+       
         <div class="card-body ">
 <div class="row">
 
     @forelse ($devoires as $d)
-    <div class="col-md-4 my-2">
+    <div class="col-md-6 my-2">
         <div class="card">
-            <div class="card-header">
-                Header
-            </div>
+           
             <div class="card-body">
                 <img src=" {{asset('/img/devoire/'.$d->image)}} " class="card-img-top" alt="" height="100" width="100">
                 <h4 class="card-title">{{$d->title}}</h4>
@@ -53,9 +45,9 @@
                     created_at:{{$d->created_at}}
                 </span>
             </div>
-            <div class="card-footer text-muted">
+            <div class="card-footer text-muted d-flex justify-content-center">
              <a href=" {{route('back.formateur.devoireDetail', $d->id)}} " class="btn btn-dark btn-sm">voir</a>
-             <a href="" class="btn btn-info btn-sm">download</a>
+             <a href="" class="btn btn-info btn-sm mx-2">download</a>
              <form action="  {{route('back.formateur.deleteDevoire', $d->id)}} " method="POST">
                 @csrf
             @method('delete')
@@ -84,10 +76,8 @@
  
     </div>
     <div class="col-md-4">
-        <div class="card">
-            <div class="card-header bg-primary">
-             add devoire
-            </div>
+        <div class="iq-card">
+           
            
             <form action=" {{route('back.formateur.addDevoire')}} " method="POST" enctype="multipart/form-data">
                 @csrf
@@ -97,10 +87,12 @@
                 <div class="invalid-feedback">
                     Validation message
                 </div>
+               <div class="form-group">
                 <label for="description">description</label>
                 <textarea name="description" id="description" cols="30" rows="10"  class="form-control ">
 
                 </textarea>
+               </div>
                
                 <div class="invalid-feedback">
                     Validation message

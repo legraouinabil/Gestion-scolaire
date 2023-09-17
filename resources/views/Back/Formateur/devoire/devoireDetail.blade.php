@@ -3,46 +3,13 @@
 
 @section('content')
 
-<div class="iq-card-body ">
-    <nav aria-label="breadcrumb ">
-        <ol class="breadcrumb bg-primary  ">
-           <li class="breadcrumb-item"><a href="#" class="text-white"><i class="ri-home-4-line mr-1 float-left"></i>Home</a></li>
-           <li class="breadcrumb-item"><a href="#" class="text-white">Library</a></li>
-           <li class="breadcrumb-item active text-white" aria-current="page">Data</li>
-        </ol>
-     </nav>
-</div>
- 
+
 
 <div class="row">
-    <div class="col-md-3">
-<div class="card">
-    <div class="card-header bg-primary">
-        devoire detail
-    </div>
-    <img class="card-img-top" src="{{ asset('/img/devoire/'.$devoire->image)}}" alt="">
-    <div class="card-body">
-        <h4 class="card-title">{{$devoire->title}}</h4>
-        <p class="card-text">{{$devoire->description}}</p>
-        <small>
-            {{$devoire->created_at}}
-        </small>
-    </div>
-
-    <div class="card-footer d-flex justify-content-between">
-       <span>
-        {{$devoire->file}} </span> 
-        <span>
-            <i class="fa fa-file" aria-hidden="true"></i>
-        </span>
-    </div>
-</div>
-    </div>
-    <div class="col-md-9">
-      <div class="card">
-        <div class="card-header bg-primary">
-          stagaire repond
-        </div>
+    
+    <div class="col-md-12">
+      <div class="iq-card">
+      
         <div class="card-body">
             <ul class="list-group">
 
