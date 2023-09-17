@@ -30,7 +30,7 @@
                   <a href="{{route('back.formateur.course')}}" class="iq-waves-effect "><i class="ri-book-open-line  "></i><span>Courses</span></a>
                </li>
                <li class="@if(Route::currentRouteName() ==  'back.formateur.devoire') active @endif ">
-                  <a href="{{route('back.formateur.devoire')}}" class="iq-waves-effect "><i class="ri-calendar-line"></i><span>Devoire</span></a>
+                  <a href="{{route('back.formateur.devoire')}}" class="iq-waves-effect "><i class="ri-calendar-line"></i><span>Devoires</span></a>
                </li>
                <li class="@if(Route::currentRouteName() ==  'back.formateur.note') active @endif ">
                   <a href="{{route('back.formateur.note')}}" class="iq-waves-effect "><i class="ri-file-line "></i><span>Note</span></a>
